@@ -1,57 +1,100 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta charset="utf-8">
+  
   <title>Java容器知识点总结 | freshergogo</title>
-  <meta name="description" content="" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="MobileOptimized" content="320" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic|Open+Sans:700,400" />
-
-  <meta name="generator" content="freshergogo">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ArrayListArrayList 源码阅读增加123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990/**">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java容器知识点总结">
+<meta property="og:url" content="http://freshergogo.github.io/2017/03/24/Java容器知识点总结/index.html">
+<meta property="og:site_name" content="freshergogo">
+<meta property="og:description" content="ArrayListArrayList 源码阅读增加123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990/**">
+<meta property="og:image" content="http://freshergogo.github.io/images/java_collections.png">
+<meta property="og:image" content="http://freshergogo.github.io/images/hashmap_put.png">
+<meta property="og:updated_time" content="2017-03-25T02:54:40.270Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java容器知识点总结">
+<meta name="twitter:description" content="ArrayListArrayList 源码阅读增加123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990/**">
+<meta name="twitter:image" content="http://freshergogo.github.io/images/java_collections.png">
+  
+    <link rel="alternate" href="/atom.xml" title="freshergogo" type="application/atom+xml">
   
   
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
   
 
-  
 </head>
 
-
-<body class="post-template">
-
-  <header class="site-head"  style="background-image: url(//blog.ghost.org/content/images/2013/Nov/cover.png)" >
-    <div class="vertical">
-        <div class="site-head-content inner">
-             <a class="blog-logo" href="/"><img src="//blog.ghost.org/content/images/2013/Nov/bloglogo_1-1.png" alt="Blog Logo"/></a> 
-            <h1 class="blog-title">freshergogo</h1>
-            <h2 class="blog-description"></h2>
-        </div>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">freshergogo</a>
+      </h1>
+      
     </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://freshergogo.github.io"></form>
+      </div>
+    </div>
+  </div>
 </header>
+      <div class="outer">
+        <section id="main"><article id="post-Java容器知识点总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/24/Java容器知识点总结/" class="article-date">
+  <time datetime="2017-03-24T06:51:14.000Z" itemprop="datePublished">2017-03-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java容器知识点总结
+    </h1>
   
 
-<main class="content" role="main">
-  <article class="post">
-    <span class="post-meta">
-      <time datetime="2017-03-24T06:51:14.000Z" itemprop="datePublished">
-          2017-03-24
-      </time>
+      </header>
     
-    
-    | 
-    <a href='/tags/学习/'>学习</a>
-    
-    
-</span>
-    <h1 class="post-title">Java容器知识点总结</h1>
-    <section class="post-content">
-      <p><img src="/images/java_collections.png" alt="java 集合框架"></p>
+    <div class="article-entry" itemprop="articleBody">
+      
+	
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+    		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ArrayList"><span class="toc-number">1.</span> <span class="toc-text">ArrayList</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayList-源码阅读"><span class="toc-number">1.1.</span> <span class="toc-text">ArrayList 源码阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#增加"><span class="toc-number">1.1.1.</span> <span class="toc-text">增加</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除"><span class="toc-number">1.1.2.</span> <span class="toc-text">删除</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayList-vs-LinkedList"><span class="toc-number">1.2.</span> <span class="toc-text">ArrayList vs LinkedList</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayList-vs-Vector"><span class="toc-number">1.3.</span> <span class="toc-text">ArrayList vs Vector</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashMap"><span class="toc-number">2.</span> <span class="toc-text">HashMap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#确定哈希桶数组索引位置"><span class="toc-number">2.1.</span> <span class="toc-text">确定哈希桶数组索引位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#put"><span class="toc-number">2.2.</span> <span class="toc-text">put</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#扩容机制"><span class="toc-number">2.3.</span> <span class="toc-text">扩容机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JDK8对扩容机制的优化"><span class="toc-number">2.3.1.</span> <span class="toc-text">JDK8对扩容机制的优化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ConcurrentHashMap"><span class="toc-number">3.</span> <span class="toc-text">ConcurrentHashMap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用分段锁实现多个线程间的并发写操作"><span class="toc-number">3.1.</span> <span class="toc-text">用分段锁实现多个线程间的并发写操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#降低读操作对加锁的需求"><span class="toc-number">3.2.</span> <span class="toc-text">降低读操作对加锁的需求</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用-HashEntery-对象的不变性来保证正在进行的写操作不会影响正在进行的读操作"><span class="toc-number">3.2.1.</span> <span class="toc-text">用 HashEntery 对象的不变性来保证正在进行的写操作不会影响正在进行的读操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用-Volatile-变量保证get操作一定能看到已完成的写操作"><span class="toc-number">3.2.2.</span> <span class="toc-text">用 Volatile 变量保证get操作一定能看到已完成的写操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#依然可能有重排序问题-机率相当小"><span class="toc-number">3.2.3.</span> <span class="toc-text">依然可能有重排序问题,机率相当小</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">4.</span> <span class="toc-text">参考</span></a></li></ol>
+		</div>
+	
+        <p><img src="/images/java_collections.png" alt="java 集合框架"></p>
 <h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><h3 id="ArrayList-源码阅读"><a href="#ArrayList-源码阅读" class="headerlink" title="ArrayList 源码阅读"></a>ArrayList 源码阅读</h3><h4 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">     * 添加一个元素</div><div class="line">     */</div><div class="line">    public boolean add(E e) &#123;</div><div class="line">       // 进行扩容检查</div><div class="line">       ensureCapacity( size + 1);  // Increments modCount</div><div class="line">       // 将e增加至list的数据尾部，容量+1</div><div class="line">        elementData[size ++] = e;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 在指定位置添加一个元素</div><div class="line">     */</div><div class="line">    public void add(int index, E element) &#123;</div><div class="line">        // 判断索引是否越界，这里会抛出多么熟悉的异常。。。</div><div class="line">        if (index &gt; size || index &lt; 0)</div><div class="line">           throw new IndexOutOfBoundsException(</div><div class="line">               &quot;Index: &quot;+index+&quot;, Size: &quot; +size);</div><div class="line"></div><div class="line">       // 进行扩容检查</div><div class="line">       ensureCapacity( size+1);  // Increments modCount  </div><div class="line">       // 对数组进行复制处理，目的就是空出index的位置插入element，并将index后的元素位移一个位置</div><div class="line">       System. arraycopy(elementData, index, elementData, index + 1,</div><div class="line">                      size - index);</div><div class="line">       // 将指定的index位置赋值为element</div><div class="line">        elementData[index] = element;</div><div class="line">       // list容量+1</div><div class="line">        size++;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * 增加一个集合元素</div><div class="line">     */</div><div class="line">    public boolean addAll(Collection&lt;? extends E&gt; c) &#123;</div><div class="line">       //将c转换为数组</div><div class="line">       Object[] a = c.toArray();</div><div class="line">        int numNew = a.length ;</div><div class="line">       //扩容检查</div><div class="line">       ensureCapacity( size + numNew);  // Increments modCount</div><div class="line">       //将c添加至list的数据尾部</div><div class="line">        System. arraycopy(a, 0, elementData, size, numNew);</div><div class="line">       //更新当前容器大小</div><div class="line">        size += numNew;</div><div class="line">        return numNew != 0;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * 在指定位置，增加一个集合元素</div><div class="line">     */</div><div class="line">    public boolean addAll(int index, Collection&lt;? extends E&gt; c) &#123;</div><div class="line">        if (index &gt; size || index &lt; 0)</div><div class="line">           throw new IndexOutOfBoundsException(</div><div class="line">               &quot;Index: &quot; + index + &quot;, Size: &quot; + size);</div><div class="line"></div><div class="line">       Object[] a = c.toArray();</div><div class="line">        int numNew = a.length ;</div><div class="line">       ensureCapacity( size + numNew);  // Increments modCount</div><div class="line"></div><div class="line">       // 计算需要移动的长度（index之后的元素个数）</div><div class="line">        int numMoved = size - index;</div><div class="line">       // 数组复制，空出第index到index+numNum的位置，即将数组index后的元素向右移动numNum个位置</div><div class="line">        if (numMoved &gt; 0)</div><div class="line">           System. arraycopy(elementData, index, elementData, index + numNew,</div><div class="line">                          numMoved);</div><div class="line"></div><div class="line">       // 将要插入的集合元素复制到数组空出的位置中</div><div class="line">        System. arraycopy(a, 0, elementData, index, numNew);</div><div class="line">        size += numNew;</div><div class="line">        return numNew != 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 数组容量检查，不够时则进行扩容</div><div class="line">     */</div><div class="line">   public void ensureCapacity( int minCapacity) &#123;</div><div class="line">        modCount++;</div><div class="line">       // 当前数组的长度</div><div class="line">        int oldCapacity = elementData .length;</div><div class="line">       // 最小需要的容量大于当前数组的长度则进行扩容</div><div class="line">        if (minCapacity &gt; oldCapacity) &#123;</div><div class="line">           Object oldData[] = elementData;</div><div class="line">          // 新扩容的数组长度为旧容量的1.5倍+1</div><div class="line">           int newCapacity = (oldCapacity * 3)/2 + 1;</div><div class="line">          // 如果新扩容的数组长度还是比最小需要的容量小，则以最小需要的容量为长度进行扩容</div><div class="line">           if (newCapacity &lt; minCapacity)</div><div class="line">              newCapacity = minCapacity;</div><div class="line">            // minCapacity is usually close to size, so this is a win:</div><div class="line">            // 进行数据拷贝，Arrays.copyOf底层实现是System.arrayCopy()</div><div class="line">            elementData = Arrays.copyOf( elementData, newCapacity);</div><div class="line">       &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <ol>
 <li>如果在某个 index 插入, 先进行越界检查.</li>
@@ -85,68 +128,132 @@
 <h4 id="依然可能有重排序问题-机率相当小"><a href="#依然可能有重排序问题-机率相当小" class="headerlink" title="依然可能有重排序问题,机率相当小"></a>依然可能有重排序问题,机率相当小</h4><p>同时，HashEntry 类的 value 域被声明为 Volatile 型,但不是final，Java 的内存模型可以保证：某个写线程对 value 域的写入马上可以被后续的某个读线程“看”到。在 ConcurrentHashMap 中，不允许用 null 作为键和值，当读线程读到某个 HashEntry 的 value 域的值为 null 时，便知道产生了冲突——发生了重排序现象，需要加锁后重新读入这个 value 值。这些特性互相配合，使得读线程即使在不加锁状态下，也能正确访问 ConcurrentHashMap。get中有一个readValueUnderLock调用.</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.jianshu.com/p/085a5ba2aca8" target="_blank" rel="external">http://www.jianshu.com/p/085a5ba2aca8</a><br><a href="http://tech.meituan.com/java-hashmap.html" target="_blank" rel="external">http://tech.meituan.com/java-hashmap.html</a><br><a href="https://www.ibm.com/developerworks/cn/java/java-lo-concurrenthashmap/" target="_blank" rel="external">https://www.ibm.com/developerworks/cn/java/java-lo-concurrenthashmap/</a></p>
 
-    </section>
-    <footer class="post-footer">
-      <section class="author">
-    <h4>黄文耿</h4>
-    <p>学生</p>
-</section>
-      <section class="share">
-    <h4>Share this post</h4>
-    <a class="icon-twitter" href="http://twitter.com/share?url=http://freshergogo.github.io/2017/03/24/Java容器知识点总结/"
-       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-        <span class="hidden">Twitter</span>
-    </a>
-    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://freshergogo.github.io/2017/03/24/Java容器知识点总结/"
-       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-        <span class="hidden">Facebook</span>
-    </a>
-    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://freshergogo.github.io/2017/03/24/Java容器知识点总结/"
-       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-        <span class="hidden">Google+</span>
-    </a>
-</section>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://freshergogo.github.io/2017/03/24/Java容器知识点总结/" data-id="cj0ooit320001ns5hj7bmtg3m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习/">学习</a></li></ul>
+
     </footer>
-  </article>
-  <nav class="pagination" role="pagination">
+  </div>
+  
     
-    <a class="newer-posts" href="/2017/03/25/jvm知识点总结/">
-        ← jvm知识点总结
+<nav id="article-nav">
+  
+    <a href="/2017/03/25/jvm知识点总结/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          jvm知识点总结
+        
+      </div>
     </a>
-    
-    <span class="page-number">•</span>
-    
-    <a class="older-posts" href="/2017/03/22/实习面试总结/">
-        实习面试总结 →
+  
+  
+    <a href="/2017/03/22/实习面试总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">实习面试总结</div>
     </a>
-    
+  
 </nav>
-  <div id="comment" class="comments-area">
-    <h1 class="title"><a href="#disqus_comments" name="disqus_comments">Comments</a></h1>
 
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
     
-</div>
-</main>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习/">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a></li></ul>
+    </div>
+  </div>
 
 
   
-<footer class="site-footer">
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/学习/" style="font-size: 20px;">学习</a> <a href="/tags/工作/" style="font-size: 10px;">工作</a>
+    </div>
+  </div>
+
   
-  <div class="inner">
-     <section class="copyright">All content copyright <a href="/">freshergogo</a> &copy; 2014 &bull; All rights reserved.</section>
-     <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://zespia.tw/hexo/">Hexo</a></section>
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/25/jvm知识点总结/">jvm知识点总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/24/Java容器知识点总结/">Java容器知识点总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/22/实习面试总结/">实习面试总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 黄文耿<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
   </div>
 </footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
-<script type="text/javascript" src="/js/index.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
+<script src="/js/script.js"></script>
 
-
+  </div>
 </body>
 </html>

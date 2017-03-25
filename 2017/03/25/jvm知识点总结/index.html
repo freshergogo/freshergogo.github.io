@@ -1,57 +1,118 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta charset="utf-8">
+  
   <title>jvm知识点总结 | freshergogo</title>
-  <meta name="description" content="" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="MobileOptimized" content="320" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是 JVMJVM 是 编译后的 Java 程序（.class文件）和硬件系统之间的接口JVM = 类加载器 classloader + 执行引擎 execution engine + 运行时数据区域 runtime data area
 
-  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic|Open+Sans:700,400" />
+实现平台无关性
+对java程序进行安全检查
 
-  <meta name="generator" content="freshergogo">
+class loader把硬盘上的class 文件加载到JVM中的运行时数据区域,把Java字节代码转换成JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jvm知识点总结">
+<meta property="og:url" content="http://freshergogo.github.io/2017/03/25/jvm知识点总结/index.html">
+<meta property="og:site_name" content="freshergogo">
+<meta property="og:description" content="什么是 JVMJVM 是 编译后的 Java 程序（.class文件）和硬件系统之间的接口JVM = 类加载器 classloader + 执行引擎 execution engine + 运行时数据区域 runtime data area
 
+实现平台无关性
+对java程序进行安全检查
+
+class loader把硬盘上的class 文件加载到JVM中的运行时数据区域,把Java字节代码转换成JVM">
+<meta property="og:image" content="http://freshergogo.github.io/images/classloader_architecture.png">
+<meta property="og:image" content="http://freshergogo.github.io/images/ClassLoaderFlow.png">
+<meta property="og:image" content="http://freshergogo.github.io/images/java_memory_structure.png">
+<meta property="og:image" content="http://freshergogo.github.io/images/java_heap_memory.png">
+<meta property="og:image" content="http://freshergogo.github.io/images/garbage_collector.jpg">
+<meta property="og:updated_time" content="2017-03-25T02:54:30.954Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jvm知识点总结">
+<meta name="twitter:description" content="什么是 JVMJVM 是 编译后的 Java 程序（.class文件）和硬件系统之间的接口JVM = 类加载器 classloader + 执行引擎 execution engine + 运行时数据区域 runtime data area
+
+实现平台无关性
+对java程序进行安全检查
+
+class loader把硬盘上的class 文件加载到JVM中的运行时数据区域,把Java字节代码转换成JVM">
+<meta name="twitter:image" content="http://freshergogo.github.io/images/classloader_architecture.png">
+  
+    <link rel="alternate" href="/atom.xml" title="freshergogo" type="application/atom+xml">
   
   
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
   
 
-  
 </head>
 
-
-<body class="post-template">
-
-  <header class="site-head"  style="background-image: url(//blog.ghost.org/content/images/2013/Nov/cover.png)" >
-    <div class="vertical">
-        <div class="site-head-content inner">
-             <a class="blog-logo" href="/"><img src="//blog.ghost.org/content/images/2013/Nov/bloglogo_1-1.png" alt="Blog Logo"/></a> 
-            <h1 class="blog-title">freshergogo</h1>
-            <h2 class="blog-description"></h2>
-        </div>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">freshergogo</a>
+      </h1>
+      
     </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://freshergogo.github.io"></form>
+      </div>
+    </div>
+  </div>
 </header>
+      <div class="outer">
+        <section id="main"><article id="post-jvm知识点总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/25/jvm知识点总结/" class="article-date">
+  <time datetime="2017-03-25T01:52:41.000Z" itemprop="datePublished">2017-03-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      jvm知识点总结
+    </h1>
   
 
-<main class="content" role="main">
-  <article class="post">
-    <span class="post-meta">
-      <time datetime="2017-03-25T01:52:41.000Z" itemprop="datePublished">
-          2017-03-25
-      </time>
+      </header>
     
-    
-    | 
-    <a href='/tags/学习/'>学习</a>
-    
-    
-</span>
-    <h1 class="post-title">jvm知识点总结</h1>
-    <section class="post-content">
-      <h2 id="什么是-JVM"><a href="#什么是-JVM" class="headerlink" title="什么是 JVM"></a>什么是 JVM</h2><p>JVM 是 编译后的 Java 程序（.class文件）和硬件系统之间的接口<br>JVM = 类加载器 classloader + 执行引擎 execution engine + 运行时数据区域 runtime data area</p>
+    <div class="article-entry" itemprop="articleBody">
+      
+	
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+    		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是-JVM"><span class="toc-number">1.</span> <span class="toc-text">什么是 JVM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#class-loader"><span class="toc-number">2.</span> <span class="toc-text">class loader</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#加载方式"><span class="toc-number">2.1.</span> <span class="toc-text">加载方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#层次结构"><span class="toc-number">2.2.</span> <span class="toc-text">层次结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类加载器的加载"><span class="toc-number">2.3.</span> <span class="toc-text">类加载器的加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双亲委派模型（Parent-Delegation-Model）"><span class="toc-number">2.4.</span> <span class="toc-text">双亲委派模型（Parent Delegation Model）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#加载类的工作过程"><span class="toc-number">2.4.1.</span> <span class="toc-text">加载类的工作过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#作用"><span class="toc-number">2.4.2.</span> <span class="toc-text">作用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类加载器与-Web-容器"><span class="toc-number">2.5.</span> <span class="toc-text">类加载器与 Web 容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类加载器与-OSGi"><span class="toc-number">2.6.</span> <span class="toc-text">类加载器与 OSGi</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类的加载、链接和初始化"><span class="toc-number">2.7.</span> <span class="toc-text">类的加载、链接和初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Java类的链接"><span class="toc-number">2.7.1.</span> <span class="toc-text">Java类的链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java类的初始化"><span class="toc-number">2.7.2.</span> <span class="toc-text">Java类的初始化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行引擎"><span class="toc-number">3.</span> <span class="toc-text">执行引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用-1"><span class="toc-number">3.1.</span> <span class="toc-text">作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#runtime-data-area"><span class="toc-number">4.</span> <span class="toc-text">runtime data area</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#java-memory-structure"><span class="toc-number">4.1.</span> <span class="toc-text">java memory structure</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常量池"><span class="toc-number">4.2.</span> <span class="toc-text">常量池</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#garbage-collection"><span class="toc-number">5.</span> <span class="toc-text">garbage collection</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾回收技术"><span class="toc-number">5.1.</span> <span class="toc-text">垃圾回收技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#发现垃圾"><span class="toc-number">5.1.1.</span> <span class="toc-text">发现垃圾</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#回收垃圾"><span class="toc-number">5.1.2.</span> <span class="toc-text">回收垃圾</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一些常用的垃圾收集器"><span class="toc-number">5.1.3.</span> <span class="toc-text">一些常用的垃圾收集器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#heap组成"><span class="toc-number">5.2.</span> <span class="toc-text">heap组成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM垃圾回收机制"><span class="toc-number">5.3.</span> <span class="toc-text">JVM垃圾回收机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#新生代-vs-老年代"><span class="toc-number">5.3.1.</span> <span class="toc-text">新生代 vs 老年代</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#新生代的GC和垃圾收集器"><span class="toc-number">5.3.2.</span> <span class="toc-text">新生代的GC和垃圾收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#旧生代的GC和垃圾收集器"><span class="toc-number">5.3.3.</span> <span class="toc-text">旧生代的GC和垃圾收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对比"><span class="toc-number">5.3.4.</span> <span class="toc-text">对比</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#垃圾收集器总结"><span class="toc-number">5.3.5.</span> <span class="toc-text">垃圾收集器总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概念理解"><span class="toc-number">5.3.6.</span> <span class="toc-text">概念理解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#永久代"><span class="toc-number">5.3.7.</span> <span class="toc-text">永久代</span></a></li></ol></li></ol></li></ol>
+		</div>
+	
+        <h2 id="什么是-JVM"><a href="#什么是-JVM" class="headerlink" title="什么是 JVM"></a>什么是 JVM</h2><p>JVM 是 编译后的 Java 程序（.class文件）和硬件系统之间的接口<br>JVM = 类加载器 classloader + 执行引擎 execution engine + 运行时数据区域 runtime data area</p>
 <ul>
 <li>实现平台无关性</li>
 <li>对java程序进行安全检查</li>
@@ -206,64 +267,123 @@
 </li>
 </ul>
 
-    </section>
-    <footer class="post-footer">
-      <section class="author">
-    <h4>黄文耿</h4>
-    <p>学生</p>
-</section>
-      <section class="share">
-    <h4>Share this post</h4>
-    <a class="icon-twitter" href="http://twitter.com/share?url=http://freshergogo.github.io/2017/03/25/jvm知识点总结/"
-       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-        <span class="hidden">Twitter</span>
-    </a>
-    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://freshergogo.github.io/2017/03/25/jvm知识点总结/"
-       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-        <span class="hidden">Facebook</span>
-    </a>
-    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://freshergogo.github.io/2017/03/25/jvm知识点总结/"
-       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-        <span class="hidden">Google+</span>
-    </a>
-</section>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://freshergogo.github.io/2017/03/25/jvm知识点总结/" data-id="cj0ooit3a0003ns5h1ps5cb9h" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习/">学习</a></li></ul>
+
     </footer>
-  </article>
-  <nav class="pagination" role="pagination">
+  </div>
+  
     
-    <span class="page-number">•</span>
-    
-    <a class="older-posts" href="/2017/03/24/Java容器知识点总结/">
-        Java容器知识点总结 →
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/24/Java容器知识点总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java容器知识点总结</div>
     </a>
-    
+  
 </nav>
-  <div id="comment" class="comments-area">
-    <h1 class="title"><a href="#disqus_comments" name="disqus_comments">Comments</a></h1>
 
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
     
-</div>
-</main>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习/">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a></li></ul>
+    </div>
+  </div>
 
 
   
-<footer class="site-footer">
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/学习/" style="font-size: 20px;">学习</a> <a href="/tags/工作/" style="font-size: 10px;">工作</a>
+    </div>
+  </div>
+
   
-  <div class="inner">
-     <section class="copyright">All content copyright <a href="/">freshergogo</a> &copy; 2014 &bull; All rights reserved.</section>
-     <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://zespia.tw/hexo/">Hexo</a></section>
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/25/jvm知识点总结/">jvm知识点总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/24/Java容器知识点总结/">Java容器知识点总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/22/实习面试总结/">实习面试总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 黄文耿<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
   </div>
 </footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
-<script type="text/javascript" src="/js/index.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
+<script src="/js/script.js"></script>
 
-
+  </div>
 </body>
 </html>
