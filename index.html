@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://freshergogo.github.io"></form>
@@ -61,188 +61,455 @@
       <div class="outer">
         <section id="main">
   
-    <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %>" itemscope itemprop="blogPost">
+    <article id="post-spring基础一" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <%- partial('post/date', {class_name: 'article-date', date_format: null}) %>
-    <%- partial('post/category') %>
+    <a href="/2017/03/27/spring基础一/" class="article-date">
+  <time datetime="2017-03-27T02:55:26.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
   </div>
   <div class="article-inner">
-    <%- partial('post/gallery') %>
-    <% if (post.link || post.title){ %>
+    
+    
       <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/spring基础一/">spring基础一</a>
+    </h1>
+  
+
       </header>
-    <% } %>
+    
     <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link){ %>
-          <p class="article-more-link">
-            <a href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %></a>
-          </p>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
+      
+	
+        <h2 id="什么是-spring"><a href="#什么是-spring" class="headerlink" title="什么是 spring"></a>什么是 spring</h2><p>Spring 是一个为了解决企业应用程序开发复杂性而创建的 Java 开源框架。</p>
+<h2 id="hello-world"><a href="#hello-world" class="headerlink" title="hello world"></a>hello world</h2><ol>
+<li>打开 intellij idea</li>
+<li>新建 spring 项目: file -&gt; new -&gt; project, 选择 spring, next -&gt; finish</li>
+<li><p>在 src 文件夹下添加三个文件</p>
+<ul>
+<li><p>HelloWorld class</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">   public class HelloWorld &#123;</div><div class="line">   	private String message;</div><div class="line">   	public void setMessage(String message)&#123;</div><div class="line">       	this.message  = message;</div><div class="line">   	&#125;</div><div class="line">   	public void getMessage()&#123;</div><div class="line">       	System.out.println(&quot;Your Message : &quot; + message);</div><div class="line">   	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Main class</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">   import org.springframework.beans.factory.xml.XmlBeanFactory;</div><div class="line">import org.springframework.core.io.ClassPathResource;</div><div class="line">public class Main &#123;</div><div class="line">   	public static void main(String[] args) &#123;</div><div class="line">       	XmlBeanFactory factory = new XmlBeanFactory</div><div class="line">               	(new ClassPathResource(&quot;Beans.xml&quot;));</div><div class="line">       	HelloWorld obj = (HelloWorld) factory.getBean(&quot;helloWorld&quot;);</div><div class="line">       	obj.getMessage();</div><div class="line">   	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Beans.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">   &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</div><div class="line">          xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</div><div class="line">      	   xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;</div><div class="line"></div><div class="line">   	&lt;bean id=&quot;helloWorld&quot; class=&quot;HelloWorld&quot;&gt;</div><div class="line">       	&lt;property name=&quot;message&quot; value=&quot;Hello World!&quot;/&gt;</div><div class="line">   	&lt;/bean&gt;</div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>运行程序, 得到输出: Your Message : Hello World!</p>
+</li>
+</ol>
+<h3 id="hello-world-里做了什么"><a href="#hello-world-里做了什么" class="headerlink" title="hello world 里做了什么"></a>hello world 里做了什么</h3><p><img src="/images/springcontainer.jpg" alt=""></p>
+<p>在 main 函数里, 我们创建了一个 XmlBeanFactory. 它是一个 spring 容器, 根据阅读配置元数据提供的指令，对对象进行实例化，配置和组装, 并管理他们的整个生命周期从创建到销毁。配置元数据可以通过 XML，Java 注释或 Java 代码来表示。</p>
+<h3 id="为什么使用容器管理对象而不直接创建对象"><a href="#为什么使用容器管理对象而不直接创建对象" class="headerlink" title="为什么使用容器管理对象而不直接创建对象"></a>为什么使用容器管理对象而不直接创建对象</h3><p><img src="/images/齿轮_耦合关系_full.jpg" alt=""><br><img src="/images/齿轮_解耦合_full.jpg" alt=""></p>
+<p>前一张图中, 当对象 a 依赖对象 b 时, 需要自己实例化对象 b , 耦合程度高, 后一张图中, 由容器负责创建和管理对象 b 并组装到对象 a, 耦合程度低. 对象 b 的控制权从对象 a 转移到容器, 即控制反转. spring 中用依赖注入实现控制反转: 让容器全权负责依赖查询，受管组件只需要暴露依赖对象的setter方法或者带参数的构造子或者接口，使容器可以在初始化时组装对象的依赖关系。</p>
+<h2 id="再来一个例子"><a href="#再来一个例子" class="headerlink" title="再来一个例子"></a>再来一个例子</h2><ol>
+<li>下载 aspectjweaver-1.6.6.jar , file -&gt; project structure -&gt; libraries -&gt; add, 添加下载的 jar</li>
+<li><p>修改 Main</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">import org.springframework.context.ApplicationContext;</div><div class="line">import org.springframework.context.support.ClassPathXmlApplicationContext;</div><div class="line">public class Main &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        ApplicationContext act = new ClassPathXmlApplicationContext(&quot;Beans.xml&quot;);</div><div class="line">        HelloWorld obj = (HelloWorld) act.getBean(&quot;helloWorld&quot;);</div><div class="line">        obj.sayHello();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改 HelloWorld</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public class HelloWorld &#123;</div><div class="line">    public void sayHello()&#123;</div><div class="line">        System.out.println(&quot;hello&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改 Beans.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</div><div class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</div><div class="line">       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;</div><div class="line"></div><div class="line">    &lt;aop:aspectj-autoproxy/&gt;</div><div class="line"></div><div class="line">    &lt;bean id=&quot;helloWorld&quot; class=&quot;HelloWorld&quot;&gt;&lt;/bean&gt;</div><div class="line"></div><div class="line">    &lt;bean id=&quot;myAspect&quot; class=&quot;HelloAspect&quot;&gt;&lt;/bean&gt;</div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加 HelloAspect</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">import org.aspectj.lang.annotation.Aspect;</div><div class="line">import org.aspectj.lang.annotation.Before;</div><div class="line">@Aspect</div><div class="line">public class HelloAspect &#123;</div><div class="line"></div><div class="line">    @Before(&quot;execution(* HelloWorld.sayHello())&quot;)</div><div class="line">    public void doAccessCheck() &#123;</div><div class="line">        System.out.println(&quot;before say hello&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>运行项目, 得到输出 before say hello hello</p>
+</li>
+</ol>
+<h3 id="这个例子又做了什么"><a href="#这个例子又做了什么" class="headerlink" title="这个例子又做了什么"></a>这个例子又做了什么</h3><p>查看 main 函数, 我们仍然是先获得 helloWorld 这个 bean, 再调用它的 sayHello 方法. 通过输出可以发现, 在 sayHello 之前, HelloAspect 里的 doAccessCheck 方法先被调用了. 这是因为我们定义了一个 Aspect, 即 HelloAspect. 这个 Aspect 相当于拦截器来拦截一个应用程序，例如，当执行一个方法时，你可以在方法执行之前或之后添加额外的功能。</p>
+<h3 id="为什么需要-Aspect"><a href="#为什么需要-Aspect" class="headerlink" title="为什么需要 Aspect"></a>为什么需要 Aspect</h3><p>Aspect 用于实现 AOP (面向切面) 编程, 它是对 OOP 的一种补充.</p>
+<p>举个例子, 日志打印. 在应用中往往在多个地方需要打印日志, 比如说在每次访问数据库前都打印 “将要访问数据库”. 在 OOP 中, 如果想要重用打印日志的代码, 我们可以把打印日志的代码封装到一个类, 让所有要打印日志的子类去继承, 这样做有两个缺点, 一个是让很多子类去继承一个父类, 强耦合, 另一个是需要由业务逻辑代码显式地去调用打印日志的方法, 如果说之后在访问数据库前要加入权限验证, 又需要去修改原来的代码, 让它显式地调用权限验证的方法. 另一个方法是使用代理, AOP 就是一种很方便的代理, 可以代理多个类多个方法, 只要定义好增强逻辑和它的切入点就可以了, 其他的东西都可以交给框架处理.</p>
+<p>我们知道，OOP引进”抽象”、”封装”、”继承”、”多态”等概念,对万事万物进行抽象和封装，来建立一种对象的层次结构，它强调了一种完整事物的自上而下的关系。而 AOP 技术则恰恰相反，它利用一种称为”横切”的技术，能够剖解开封装的对象内部，并将那些影响了多个类并且与具体业务无关的公共行为 封装成一个独立的模块（称为切面）。更重要的是，它又能以巧夺天功的妙手将这些剖开的切面复原，不留痕迹的融入核心业务逻辑中。</p>
+
+      
     </div>
     <footer class="article-footer">
-      <a data-url="<%- post.permalink %>" data-id="<%= post._id %>" class="article-share-link"><%= __('share') %></a>
-      <% if (post.comments && config.disqus_shortname){ %>
-        <a href="<%- post.permalink %>#disqus_thread" class="article-comment-link"><%= __('comment') %></a>
-      <% } %>
-      <%- partial('post/tag') %>
+      <a data-url="http://freshergogo.github.io/2017/03/27/spring基础一/" data-id="cj0rixnpx0003ty5h571lgt63" class="article-share-link">Share</a>
+      
+      
     </footer>
   </div>
-  <% if (!index){ %>
-    <%- partial('post/nav') %>
-  <% } %>
+  
 </article>
 
-<% if (!index && post.comments && config.disqus_shortname){ %>
-<section id="comments">
-  <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  </div>
-</section>
-<% } %>
+
 
   
-    <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %>" itemscope itemprop="blogPost">
+    <article id="post-jvm知识点总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <%- partial('post/date', {class_name: 'article-date', date_format: null}) %>
-    <%- partial('post/category') %>
+    <a href="/2017/03/25/jvm知识点总结/" class="article-date">
+  <time datetime="2017-03-25T01:52:41.000Z" itemprop="datePublished">2017-03-25</time>
+</a>
+    
   </div>
   <div class="article-inner">
-    <%- partial('post/gallery') %>
-    <% if (post.link || post.title){ %>
+    
+    
       <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/25/jvm知识点总结/">jvm知识点总结</a>
+    </h1>
+  
+
       </header>
-    <% } %>
+    
     <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link){ %>
-          <p class="article-more-link">
-            <a href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %></a>
-          </p>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
+      
+	
+        <h2 id="什么是-JVM"><a href="#什么是-JVM" class="headerlink" title="什么是 JVM"></a>什么是 JVM</h2><p>JVM 是 编译后的 Java 程序（.class文件）和硬件系统之间的接口<br>JVM = 类加载器 classloader + 执行引擎 execution engine + 运行时数据区域 runtime data area</p>
+<ul>
+<li>实现平台无关性</li>
+<li>对java程序进行安全检查</li>
+</ul>
+<h2 id="class-loader"><a href="#class-loader" class="headerlink" title="class loader"></a>class loader</h2><p>把硬盘上的class 文件加载到JVM中的运行时数据区域,把Java字节代码转换成JVM中的java.lang.Class类的对象, 但是它不负责这个类文件能否执行，而这个是 执行引擎 负责的</p>
+<h3 id="加载方式"><a href="#加载方式" class="headerlink" title="加载方式"></a>加载方式</h3><ul>
+<li>隐式: 运行过程中，碰到new方式生成对象时，隐式调用classLoader到JVM</li>
+<li>显式：通过class.forname()动态加载</li>
+</ul>
+<h3 id="层次结构"><a href="#层次结构" class="headerlink" title="层次结构"></a>层次结构</h3><p><img src="/images/classloader_architecture.png" alt="classloader_architecture"></p>
+<ul>
+<li>Bootstrap ClassLoader称为启动加载器，是Java类中加载层次最顶层的类加载器，负责加载JDK中的核心类库，如rt.jar,resources.jar,charsets.jar等；另外，在命令行中用-Xbootclasspath选项指定的jar包也是通过Bootstrap ClassLoader加载。</li>
+<li>Extension ClassLoader：扩展类加载器，负责加载Java的扩展类库，默认加载JAVA_HOME/jre/lib/ext/目录下的所有jar;另外，用-Djava.ext.dirs指定目录下的jar包也是通过Extension ClassLoader加载。</li>
+<li>App ClassLoader：系统类加载器，负责加载应用程序classpath目录下的所有jar和class文件；另外，通过-Djava.class.path所指定的目录下的类和jar包也是通过它加载；</li>
+</ul>
+<h3 id="类加载器的加载"><a href="#类加载器的加载" class="headerlink" title="类加载器的加载"></a>类加载器的加载</h3><p>类加载器也是Java类，因为Java类的类加载器本身也是要被类加载器加载的，显然必须有第一个类加载器不是Java类，这个正是BootStrap,使用C/C++代码写的，已经封装到JVM内核中了，而ExtClassLoader和AppClassLoader是Java类。</p>
+<h3 id="双亲委派模型（Parent-Delegation-Model）"><a href="#双亲委派模型（Parent-Delegation-Model）" class="headerlink" title="双亲委派模型（Parent Delegation Model）"></a>双亲委派模型（Parent Delegation Model）</h3><p>该模型要求除了顶层的Bootstrap class loader启动类加载器外，其余的类加载器都应当有自己的父类加载器。</p>
+<ul>
+<li>子类加载器和父类加载器不是以继承（Inheritance）的关系来实现，而是通过组合（Composition）关系来复用父加载器的代码。</li>
+<li>每个类加载器都有自己的命名空间（由该加载器及所有父类加载器所加载的类组成，在同一个命名空间中，不会出现类的完整名字（包括类的包名）相同的两个类；在不同的命名空间中，有可能会出现类的完整名字（包括类的包名）相同的两个类）</li>
+</ul>
+<h4 id="加载类的工作过程"><a href="#加载类的工作过程" class="headerlink" title="加载类的工作过程"></a>加载类的工作过程</h4><ol>
+<li>检查加载缓存,若有直接返回</li>
+<li>若没有,委托父类,父类采取相同策略,一直到 bootstrap ClassLoader</li>
+<li>若所有父类都没有,由当前类加载器加载,放入缓存</li>
+</ol>
+<p><img src="/images/ClassLoaderFlow.png" alt="ClassLoaderFlow"></p>
+<h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><ul>
+<li>安全性:避免用户编写的类动态替代Java的一些核心类,比如String</li>
+<li>避免了重复加载</li>
+</ul>
+<h3 id="类加载器与-Web-容器"><a href="#类加载器与-Web-容器" class="headerlink" title="类加载器与 Web 容器"></a>类加载器与 Web 容器</h3><p>对于运行在 Java EE™容器中的 Web 应用来说，类加载器的实现方式与一般的 Java 应用有所不同。不同的 Web 容器的实现方式也会有所不同。以 Apache Tomcat 来说，每个 Web 应用都有一个对应的类加载器实例。该类加载器也使用代理模式，所不同的是它是首先尝试去加载某个类，如果找不到再代理给父类加载器。这与一般类加载器的顺序是相反的。这是 Java Servlet 规范中的推荐做法，其目的是使得 Web 应用自己的类的优先级高于 Web 容器提供的类。这种代理模式的一个例外是：Java 核心库的类是不在查找范围之内的。这也是为了保证 Java 核心库的类型安全。</p>
+<h3 id="类加载器与-OSGi"><a href="#类加载器与-OSGi" class="headerlink" title="类加载器与 OSGi"></a>类加载器与 OSGi</h3><p>OSGi™是 Java 上的动态模块系统。它为开发人员提供了面向服务和基于组件的运行环境，并提供标准的方式用来管理软件的生命周期。OSGi 已经被实现和部署在很多产品上，在开源社区也得到了广泛的支持。Eclipse 就是基于 OSGi 技术来构建的。<br>OSGi 中的每个模块（bundle）都包含 Java 包和类。模块可以声明它所依赖的需要导入（import）的其它模块的 Java 包和类（通过 Import-Package），也可以声明导出（export）自己的包和类，供其它模块使用（通过 Export-Package）。也就是说需要能够隐藏和共享一个模块中的某些 Java 包和类。这是通过 OSGi 特有的类加载器机制来实现的。OSGi 中的每个模块都有对应的一个类加载器。它负责加载模块自己包含的 Java 包和类。当它需要加载 Java 核心库的类时（以 java开头的包和类），它会代理给父类加载器（通常是启动类加载器）来完成。当它需要加载所导入的 Java 类时，它会代理给导出此 Java 类的模块来完成加载。模块也可以显式的声明某些 Java 包和类，必须由父类加载器来加载。只需要设置系统属性 org.osgi.framework.bootdelegation的值即可。<br>OSGi 模块的这种类加载器结构，使得一个类的不同版本可以共存在 Java 虚拟机中，带来了很大的灵活性。</p>
+<h3 id="类的加载、链接和初始化"><a href="#类的加载、链接和初始化" class="headerlink" title="类的加载、链接和初始化"></a>类的加载、链接和初始化</h3><p>一个Java类从字节代码到能够在JVM中被使用，需要经过加载、链接和初始化这三个步骤。这三个步骤中，对开发人员直接可见的是Java类的加载，通过使用Java类加载器（class loader）可以在运行时刻动态的加载一个Java类；而链接和初始化则是在使用Java类之前会发生的动作。本文会详细介绍Java类的加载、链接和初始化的过程。</p>
+<h4 id="Java类的链接"><a href="#Java类的链接" class="headerlink" title="Java类的链接"></a>Java类的链接</h4><ol>
+<li>验证: 验证是用来确保Java类的二进制表示在结构上是完全正确的。如果验证过程出现错误的话，会抛出java.lang.VerifyError错误。</li>
+<li>准备: 准备过程则是创建Java类中的静态域，并将这些域的值设为默认值。准备过程并不会执行代码。在一个Java类中会包含对其它类或接口的形式引用，包括它的父类、所实现的接口、方法的形式参数和返回值的Java类等。</li>
+<li>解析: 解析的过程就是确保这些被引用的类能被正确的找到。解析的过程可能会导致其它的Java类被加载。查找类的常量池中的类，字段，方法，接口的符号引用，将他们替换成直接引用的过程。</li>
+</ol>
+<h4 id="Java类的初始化"><a href="#Java类的初始化" class="headerlink" title="Java类的初始化"></a>Java类的初始化</h4><p>当一个Java类第一次被真正使用到的时候，JVM会进行该类的初始化操作。初始化过程的主要操作是执行静态代码块和初始化静态域。</p>
+<h2 id="执行引擎"><a href="#执行引擎" class="headerlink" title="执行引擎"></a>执行引擎</h2><h3 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h3><p>执行字节码，或者执行本地方法</p>
+<h2 id="runtime-data-area"><a href="#runtime-data-area" class="headerlink" title="runtime data area"></a>runtime data area</h2><h3 id="java-memory-structure"><a href="#java-memory-structure" class="headerlink" title="java memory structure"></a>java memory structure</h3><p><img src="/images/java_memory_structure.png" alt="java memory structure"></p>
+<ul>
+<li>PC程序计数器: 一块较小的内存空间，可以看做是当前线程所执行的字节码的行号指示器, NAMELY存储每个线程下一步将执行的JVM指令，如该方法为native的，则PC寄存器中不存储任何信息。Java 的多线程机制离不开程序计数器，每个线程都有一个自己的PC，以便完成不同线程上下文环境的切换。</li>
+<li>java虚拟机栈：与 PC 一样，java 虚拟机栈也是线程私有的。每一个 JVM 线程都有自己的 java 虚拟机栈，这个栈与线程同时创建，它的生命周期与线程相同。虚拟机栈描述的是Java 方法执行的内存模型：每个方法被执行的时候都会同时创建一个栈帧（Stack Frame）用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每一个方法被调用直至执行完成的过程就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。</li>
+<li>本地方法栈：与虚拟机栈的作用相似，虚拟机栈为虚拟机执行执行java方法服务，而本地方法栈则为虚拟机使用到的本地方法服务。</li>
+<li>Java堆：被所有线程共享的一块存储区域，在虚拟机启动时创建，它是JVM用来存储对象实例以及数组值的区域，可以认为Java中所有通过new创建的对象的内存都在此分配。<ul>
+<li>Java堆在JVM启动的时候就被创建，堆中储存了各种对象，这些对象被自动管理内存系统（Automatic Storage Management System，也即是常说的 “Garbage Collector（垃圾回收器）”）所管理。这些对象无需、也无法显示地被销毁。</li>
+<li>堆在JVM是所有线程共享的，因此在其上进行对象内存的分配均需要进行加锁，这也是new开销比较大的原因。鉴于上面的原因，Sun Hotspot JVM为了提升对象内存分配的效率，对于所创建的线程都会分配一块独立的空间，这块空间又称为TLAB.TLAB仅作用于新生代的Eden Space，因此在编写Java程序时，通常多个小的对象比大的对象分配起来更加高效</li>
+</ul>
+</li>
+<li>方法区: 方法区和堆区域一样，是各个线程共享的内存区域，它用于存储每一个类的结构信息，例如运行时常量池，成员变量和方法数据，构造函数和普通函数的字节码内容，还包括一些在类、实例、接口初始化时用到的特殊方法。当开发人员在程序中通过Class对象中的getName、isInstance等方法获取信息时，这些数据都来自方法区。方法区也是全局共享的，在虚拟机启动时候创建。在一定条件下它也会被GC。这块区域对应Permanent Generation 持久代。 XX：PermSize指定大小。</li>
+<li>运行时常量池: 其空间从方法区中分配，存放的为类中固定的常量信息、方法和域的引用信息。</li>
+</ul>
+<h3 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h3><p>Java中的常量池，实际上分为两种形态：静态常量池和运行时常量池。</p>
+<ul>
+<li>所谓静态常量池，即*.class文件中的常量池，class文件中的常量池不仅仅包含字符串(数字)字面量，还包含类、方法的信息，占用class文件绝大部分空间。</li>
+<li>而运行时常量池，则是jvm虚拟机在完成类装载操作后，将class文件中的常量池载入到内存中，并保存在方法区中，我们常说的常量池，就是指方法区中的运行时常量池,一个class一个。</li>
+</ul>
+<p><a href="http://www.cnblogs.com/iyangyuan/p/4631696.html" target="_blank" rel="external">String常量</a></p>
+<h2 id="garbage-collection"><a href="#garbage-collection" class="headerlink" title="garbage collection"></a>garbage collection</h2><ul>
+<li>GC有关的是: runtime data area 中的 heap（对象实例会存储在这里）,方法区 和 gabage collector方法。</li>
+<li>GC是后台的守护进程。它的特别之处是它是一个低优先级进程，但是可以根据内存的使用情况动态的调整他的优先级。因此，它是在内存中低到一定限度时才会自动运行，从而实现对内存的回收。这就是垃圾回收的时间不确定的原因。</li>
+<li>因为垃圾回收gc只能回收通过new关键字申请的内存（在堆上），但是堆上的内存并不完全是通过new申请分配的。还有一些本地方法（一般是调用的C方法）。这部分“特殊的内存”如果不手动释放，就会导致内存泄露，gc是无法回收这部分内存的。所以需要在finalize中用本地方法(native method)如free操作等，再使用gc方法。显示的GC方法是system.gc()</li>
+</ul>
+<h3 id="垃圾回收技术"><a href="#垃圾回收技术" class="headerlink" title="垃圾回收技术"></a>垃圾回收技术</h3><h4 id="发现垃圾"><a href="#发现垃圾" class="headerlink" title="发现垃圾"></a>发现垃圾</h4><ul>
+<li>引用计数法: 适合实时,不能处理循环引用.</li>
+<li>根搜索<ul>
+<li>java中可作为GC Root的对象有<ul>
+<li>虚拟机栈中引用的对象（本地变量表）</li>
+<li>方法区中静态属性引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>本地方法栈中引用的对象（Native对象）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="回收垃圾"><a href="#回收垃圾" class="headerlink" title="回收垃圾"></a>回收垃圾</h4><ul>
+<li>compact</li>
+<li>copy</li>
+<li>mark</li>
+<li>generational collector(不同代采用不同方法)</li>
+</ul>
+<h4 id="一些常用的垃圾收集器"><a href="#一些常用的垃圾收集器" class="headerlink" title="一些常用的垃圾收集器"></a>一些常用的垃圾收集器</h4><ul>
+<li><strong>标记－清除收集器</strong>: 这种收集器首先遍历对象图并标记可到达的对象，然后扫描堆栈以寻找未标记对象并释放它们的内存。这种收集器一般使用单线程工作并停止其他操作。并且，由于它只是清除了那些未标记的对象，而并没有对标记对象进行压缩，导致会产生大量内存碎片，从而浪费内存。</li>
+<li><strong>标记－压缩收集器</strong>: 有时也叫标记－清除－压缩收集器，与标记－清除收集器有相同的标记阶段。在第二阶段，则把标记对象复制到堆栈的新域中以便压缩堆栈。这种收集器也停止其他操作。</li>
+<li><strong>复制收集器</strong>: 这种收集器将堆栈分为两个域，常称为半空间。每次仅使用一半的空间，JVM生成的新对象则放在另一半空间中。GC运行时，它把可到达对象复制到另一半空间，从而压缩了堆栈。这种方法适用于短生存期的对象，持续复制长生存期的对象则导致效率降低。并且对于指定大小堆来说，需要两倍大小的内存，因为任何时候都只使用其中的一半。</li>
+<li><strong>增量收集器</strong>: 增量收集器把堆栈分为多个域，每次仅从一个域收集垃圾，也可理解为把堆栈分成一小块一小块，每次仅对某一个块进行垃圾收集。这会造成较小的应用程序中断时间，使得用户一般不能觉察到垃圾收集器正在工作。</li>
+<li><strong>分代收集器</strong>: 复制收集器的缺点是：每次收集时，所有的标记对象都要被拷贝，从而导致一些生命周期很长的对象被来回拷贝多次，消耗大量的时间。而分代收集器则可解决这个问题，分代收集器把堆栈分为两个或多个域，用以存放不同寿命的对象。JVM生成的新对象一般放在其中的某个域中。过一段时间，继续存在的对象(非短命对象)将获得使用期并转入更长寿命的域中。分代收集器对不同的域使用不同的算法以优化性能。</li>
+<li><strong>并行收集器</strong>: 并行收集器使用某种传统的算法并使用多线程并行的执行它们的工作。在多CPU机器上使用多线程技术可以显著的提高java应用程序的可扩展性。</li>
+</ul>
+<h3 id="heap组成"><a href="#heap组成" class="headerlink" title="heap组成"></a>heap组成</h3><p><img src="/images/java_heap_memory.png" alt="java heap memory"></p>
+<p>注: 永生代不属于堆</p>
+<h3 id="JVM垃圾回收机制"><a href="#JVM垃圾回收机制" class="headerlink" title="JVM垃圾回收机制"></a>JVM垃圾回收机制</h3><h4 id="新生代-vs-老年代"><a href="#新生代-vs-老年代" class="headerlink" title="新生代 vs 老年代"></a>新生代 vs 老年代</h4><ul>
+<li>默认的，新生代 ( Young ) 与老年代 ( Old ) 的比例的值为 1:2 ( 该值可以通过参数 –XX:NewRatio 来指定 )</li>
+<li>新生代 ( Young ) 被细分为 Eden 和 两个 Survivor 区域，这两个 Survivor 区域分别被命名为 from 和 to，以示区分.</li>
+<li>默认的，Edem : from : to = 8 : 1 : 1 ( 可以通过参数 –XX:SurvivorRatio 来设定 )</li>
+<li>JVM 每次只会使用 Eden 和其中的一块 Survivor 区域来为对象服务，所以无论什么时候，总是有一块 Survivor 区域是空闲着的。因此，新生代实际可用的内存空间为 9/10 ( 即90% )的新生代空间。</li>
+<li>新生代几乎是所有 Java 对象出生的地方，即 Java 对象申请的内存以及存放都是在这个地方。</li>
+<li>当对象在 Eden ( 包括一个 Survivor 区域，这里假设是 from 区域 ) 出生后，在经过一次 Minor GC 后，如果对象还存活，并且能够被另外一块 Survivor 区域所容纳( 上面已经假设为 from 区域，这里应为 to 区域，即 to 区域有足够的内存空间来存储 Eden 和 from 区域中存活的对象 )，则使用复制算法将这些仍然还存活的对象复制到另外一块 Survivor 区域 ( 即 to 区域 ) 中，然后清理所使用过的 Eden 以及 Survivor 区域 ( 即 from 区域 )，并且将这些对象的年龄设置为1，以后对象在 Survivor 区每熬过一次 Minor GC，就将对象的年龄 + 1，当对象的年龄达到某个值时 ( 默认是 15 岁，可以通过参数 -XX:MaxTenuringThreshold 来设定 )，这些对象就会成为老年代。但这也不是一定的，对于一些较大的对象 ( 即需要分配一块较大的连续内存空间 ) 则是直接进入到老年代。</li>
+<li>Full GC 是发生在老年代的垃圾收集动作，所采用的是标记-清除算法。现实的生活中，老年代的人通常会比新生代的人 “早死”。堆内存中的老年代(Old)不同于个，老年代里面的对象几乎个个都是在 Survivor 区域中熬过来的，它们是不会那么容易就 “死掉” 了的。因此，Full GC 发生的次数不会有 Minor GC 那么频繁，并且做一次 Full GC 要比进行一次 Minor GC 的时间更长。另外，标记-清除算法收集垃圾的时候会产生许多的内存碎片 ( 即不连续的内存空间 )，此后需要为较大的对象分配内存空间时，若无法找到足够的连续的内存空间，就会提前触发一次 GC 的收集动作。</li>
+</ul>
+<h4 id="新生代的GC和垃圾收集器"><a href="#新生代的GC和垃圾收集器" class="headerlink" title="新生代的GC和垃圾收集器"></a>新生代的GC和垃圾收集器</h4><ul>
+<li>新生代通常存活时间较短，因此基于Copying算法来进行回收.</li>
+<li>在Eden和FromSpace或ToSpace之间copy</li>
+<li>在执行机制上JVM提供了串行GC(SerialGC)、并行回收GC(ParallelScavenge)和并行GC(ParNew)<ul>
+<li>串行GC: 单线程，适用于单CPU、新生代空间较小及对暂停时间要求不是非常高的应用上，是client级别默认的GC方式，可以通过-XX:+UseSerialGC来强制指定</li>
+<li>并行回收GC (Parallel Scanvenge): 在整个扫描和复制过程采用多线程的方式来进行，适用于多CPU、对暂停时间要求较短的应用上，是server级别默认采用的GC方式，可用-XX:+UseParallelGC来强制指定，用-XX:ParallelGCThreads=4来指定线程数</li>
+<li>并行GC: ParNew收集器其实就是Serial收集器的多线程版本，除了使用多条线程进行垃圾收集之外，其余行为包括Serial收集器可用的所有控制参数、收集算法、Stop The World、对象分配规则、回收策略等都与Serial收集器完全一样，在实现上，这两种收集器也共用了相当多的代码。ParNew收集器是许多运行在Server模式下的虚拟机中首选的新生代收集器。除了Serial收集器外，目前只有它能与CMS收集器配合工作。</li>
+</ul>
+</li>
+</ul>
+<h4 id="旧生代的GC和垃圾收集器"><a href="#旧生代的GC和垃圾收集器" class="headerlink" title="旧生代的GC和垃圾收集器"></a>旧生代的GC和垃圾收集器</h4><ul>
+<li>旧生代与新生代不同，对象存活的时间比较长，比较稳定，因此采用标记(Mark)算法来进行回收，所谓标记就是扫描出存活的对象，然后再进行回收未被标记的对象，回收后对用空出的空间要么进行合并，要么标记出来便于下次进行分配，总之就是要减少内存碎片带来的效率损耗。</li>
+<li>执行机制上JVM提供了串行GC(SerialMSC)、并行GC(parallelMSC)和并发GC(CMS)<ul>
+<li>串行GC: Serial Old是Serial收集器的老年代版本，它同样是一个单线程收集器，使用标记－整理算法。</li>
+<li>并行GC: Parallel Old是Parallel Scavenge收集器的老年代版本，使用多线程和“标记－整理”算法。</li>
+<li>CMS收集器<ul>
+<li>初始标记（CMS initial mark）初始标记仅仅只是标记一下GC Roots能直接关联到的对象，速度很快，需要“Stop The World”。</li>
+<li>并发标记（CMS concurrent mark）并发标记阶段就是进行GC Roots Tracing的过程。</li>
+<li>重新标记（CMS remark）重新标记阶段是为了修正并发标记期间因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录，这个阶段的停顿时间一般会比初始标记阶段稍长一些，但远比并发标记的时间短，仍然需要“Stop The World”。</li>
+<li>并发清除（CMS concurrent sweep）并发清除阶段会清除对象。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>参考: <a href="http://www.importnew.com/23035.html" target="_blank" rel="external">http://www.importnew.com/23035.html</a></p>
+<h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><ul>
+<li>Parallel Scavenge收集器 VS ParNew收集器：<br>Parallel Scavenge收集器与ParNew收集器的一个重要区别是它具有自适应调节策略。</li>
+<li>Parallel Scavenge收集器 VS CMS等收集器：CMS等收集器的关注点是尽可能地缩短垃圾收集时用户线程的停顿时间，而Parallel Scavenge收集器的目标则是达到一个可控制的吞吐量（Throughput）。</li>
+</ul>
+<h4 id="垃圾收集器总结"><a href="#垃圾收集器总结" class="headerlink" title="垃圾收集器总结"></a>垃圾收集器总结</h4><p><img src="/images/garbage_collector.jpg" alt="garbage collector"></p>
+<h4 id="概念理解"><a href="#概念理解" class="headerlink" title="概念理解"></a>概念理解</h4><ul>
+<li>并行（Parallel）：指多条垃圾收集线程并行工作，但此时用户线程仍然处于等待状态。</li>
+<li>并发（Concurrent）：指用户线程与垃圾收集线程同时执行（但不一定是并行的，可能会交替执行），用户程序在继续运行，而垃圾收集程序运行于另一个CPU上</li>
+<li>新生代GC（Minor GC）：指发生在新生代的垃圾收集动作，因为Java对象大多都具备朝生夕灭的特性，所以Minor GC非常频繁，一般回收速度也比较快。</li>
+<li>老年代GC（Major GC）：指发生在老年代的GC，出现了Major GC，经常会伴随至少一次的Minor GC（但非绝对的，在Parallel Scavenge收集器的收集策略里就有直接进行Major GC的策略选择过程）。Major GC的速度一般会比Minor GC慢10倍以上。</li>
+<li>Full GC是清理整个堆空间—包括年轻代和老年代。</li>
+</ul>
+<h4 id="永久代"><a href="#永久代" class="headerlink" title="永久代"></a>永久代</h4><ul>
+<li>永久代不是Java堆内存的一部分</li>
+<li>方法区是永久代空间的一部分</li>
+<li>运行时常量池是方法区的一部分。</li>
+<li>在JDK8之前, 永久代的垃圾回收和老年代的垃圾回收是绑定的，一旦其中一个区域被占满，这两个区都要进行垃圾回收。</li>
+<li>在JDK1.8之后,用元空间代替永久代<ul>
+<li>由于类的元数据分配在本地内存中，元空间的最大可分配空间就是系统可用内存空间。因此，我们就不会遇到永久代存在时的内存溢出错误.</li>
+<li>准确的来说，每一个类加载器的存储区域都称作一个元空间，所有的元空间合在一起就是我们一直说的元空间。</li>
+<li>当一个类加载器被垃圾回收器标记为不再存活，其对应的元空间会被回收。</li>
+</ul>
+</li>
+</ul>
+
+      
     </div>
     <footer class="article-footer">
-      <a data-url="<%- post.permalink %>" data-id="<%= post._id %>" class="article-share-link"><%= __('share') %></a>
-      <% if (post.comments && config.disqus_shortname){ %>
-        <a href="<%- post.permalink %>#disqus_thread" class="article-comment-link"><%= __('comment') %></a>
-      <% } %>
-      <%- partial('post/tag') %>
+      <a data-url="http://freshergogo.github.io/2017/03/25/jvm知识点总结/" data-id="cj0rixnq20004ty5h10goazlc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习/">学习</a></li></ul>
+
     </footer>
   </div>
-  <% if (!index){ %>
-    <%- partial('post/nav') %>
-  <% } %>
+  
 </article>
 
-<% if (!index && post.comments && config.disqus_shortname){ %>
-<section id="comments">
-  <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  </div>
-</section>
-<% } %>
+
 
   
-    <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %>" itemscope itemprop="blogPost">
+    <article id="post-Java容器知识点总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <%- partial('post/date', {class_name: 'article-date', date_format: null}) %>
-    <%- partial('post/category') %>
+    <a href="/2017/03/24/Java容器知识点总结/" class="article-date">
+  <time datetime="2017-03-24T06:51:14.000Z" itemprop="datePublished">2017-03-24</time>
+</a>
+    
   </div>
   <div class="article-inner">
-    <%- partial('post/gallery') %>
-    <% if (post.link || post.title){ %>
+    
+    
       <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/24/Java容器知识点总结/">Java容器知识点总结</a>
+    </h1>
+  
+
       </header>
-    <% } %>
+    
     <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link){ %>
-          <p class="article-more-link">
-            <a href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %></a>
-          </p>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
+      
+	
+        <p><img src="/images/java_collections.png" alt="java 集合框架"></p>
+<h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><h3 id="ArrayList-源码阅读"><a href="#ArrayList-源码阅读" class="headerlink" title="ArrayList 源码阅读"></a>ArrayList 源码阅读</h3><h4 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">     * 添加一个元素</div><div class="line">     */</div><div class="line">    public boolean add(E e) &#123;</div><div class="line">       // 进行扩容检查</div><div class="line">       ensureCapacity( size + 1);  // Increments modCount</div><div class="line">       // 将e增加至list的数据尾部，容量+1</div><div class="line">        elementData[size ++] = e;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 在指定位置添加一个元素</div><div class="line">     */</div><div class="line">    public void add(int index, E element) &#123;</div><div class="line">        // 判断索引是否越界，这里会抛出多么熟悉的异常。。。</div><div class="line">        if (index &gt; size || index &lt; 0)</div><div class="line">           throw new IndexOutOfBoundsException(</div><div class="line">               &quot;Index: &quot;+index+&quot;, Size: &quot; +size);</div><div class="line"></div><div class="line">       // 进行扩容检查</div><div class="line">       ensureCapacity( size+1);  // Increments modCount  </div><div class="line">       // 对数组进行复制处理，目的就是空出index的位置插入element，并将index后的元素位移一个位置</div><div class="line">       System. arraycopy(elementData, index, elementData, index + 1,</div><div class="line">                      size - index);</div><div class="line">       // 将指定的index位置赋值为element</div><div class="line">        elementData[index] = element;</div><div class="line">       // list容量+1</div><div class="line">        size++;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * 增加一个集合元素</div><div class="line">     */</div><div class="line">    public boolean addAll(Collection&lt;? extends E&gt; c) &#123;</div><div class="line">       //将c转换为数组</div><div class="line">       Object[] a = c.toArray();</div><div class="line">        int numNew = a.length ;</div><div class="line">       //扩容检查</div><div class="line">       ensureCapacity( size + numNew);  // Increments modCount</div><div class="line">       //将c添加至list的数据尾部</div><div class="line">        System. arraycopy(a, 0, elementData, size, numNew);</div><div class="line">       //更新当前容器大小</div><div class="line">        size += numNew;</div><div class="line">        return numNew != 0;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * 在指定位置，增加一个集合元素</div><div class="line">     */</div><div class="line">    public boolean addAll(int index, Collection&lt;? extends E&gt; c) &#123;</div><div class="line">        if (index &gt; size || index &lt; 0)</div><div class="line">           throw new IndexOutOfBoundsException(</div><div class="line">               &quot;Index: &quot; + index + &quot;, Size: &quot; + size);</div><div class="line"></div><div class="line">       Object[] a = c.toArray();</div><div class="line">        int numNew = a.length ;</div><div class="line">       ensureCapacity( size + numNew);  // Increments modCount</div><div class="line"></div><div class="line">       // 计算需要移动的长度（index之后的元素个数）</div><div class="line">        int numMoved = size - index;</div><div class="line">       // 数组复制，空出第index到index+numNum的位置，即将数组index后的元素向右移动numNum个位置</div><div class="line">        if (numMoved &gt; 0)</div><div class="line">           System. arraycopy(elementData, index, elementData, index + numNew,</div><div class="line">                          numMoved);</div><div class="line"></div><div class="line">       // 将要插入的集合元素复制到数组空出的位置中</div><div class="line">        System. arraycopy(a, 0, elementData, index, numNew);</div><div class="line">        size += numNew;</div><div class="line">        return numNew != 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 数组容量检查，不够时则进行扩容</div><div class="line">     */</div><div class="line">   public void ensureCapacity( int minCapacity) &#123;</div><div class="line">        modCount++;</div><div class="line">       // 当前数组的长度</div><div class="line">        int oldCapacity = elementData .length;</div><div class="line">       // 最小需要的容量大于当前数组的长度则进行扩容</div><div class="line">        if (minCapacity &gt; oldCapacity) &#123;</div><div class="line">           Object oldData[] = elementData;</div><div class="line">          // 新扩容的数组长度为旧容量的1.5倍+1</div><div class="line">           int newCapacity = (oldCapacity * 3)/2 + 1;</div><div class="line">          // 如果新扩容的数组长度还是比最小需要的容量小，则以最小需要的容量为长度进行扩容</div><div class="line">           if (newCapacity &lt; minCapacity)</div><div class="line">              newCapacity = minCapacity;</div><div class="line">            // minCapacity is usually close to size, so this is a win:</div><div class="line">            // 进行数据拷贝，Arrays.copyOf底层实现是System.arrayCopy()</div><div class="line">            elementData = Arrays.copyOf( elementData, newCapacity);</div><div class="line">       &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>如果在某个 index 插入, 先进行越界检查.</li>
+<li>扩容检查</li>
+<li>如果在中间插入, 需要进行数组移动</li>
+<li>插入数据</li>
+</ol>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">     * 根据索引位置删除元素</div><div class="line">     */</div><div class="line">    public E remove( int index) &#123;</div><div class="line">      // 数组越界检查</div><div class="line">       RangeCheck(index);</div><div class="line"></div><div class="line">        modCount++;</div><div class="line">      // 取出要删除位置的元素，供返回使用</div><div class="line">       E oldValue = (E) elementData[index];</div><div class="line">       // 计算数组要复制的数量</div><div class="line">        int numMoved = size - index - 1;</div><div class="line">       // 数组复制，就是将index之后的元素往前移动一个位置</div><div class="line">        if (numMoved &gt; 0)</div><div class="line">           System. arraycopy(elementData, index+1, elementData, index,</div><div class="line">                          numMoved);</div><div class="line">       // 将数组最后一个元素置空（因为删除了一个元素，然后index后面的元素都向前移动了，所以最后一个就没用了），好让gc尽快回收</div><div class="line">       // 不要忘了size减一</div><div class="line">        elementData[--size ] = null; // Let gc do its work</div><div class="line"></div><div class="line">        return oldValue;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 根据元素内容删除，只删除匹配的第一个</div><div class="line">     */</div><div class="line">    public boolean remove(Object o) &#123;</div><div class="line">       // 对要删除的元素进行null判断</div><div class="line">       // 对数据元素进行遍历查找，知道找到第一个要删除的元素，删除后进行返回，如果要删除的元素正好是最后一个那就惨了，时间复杂度可达O(n) 。。。</div><div class="line">        if (o == null) &#123;</div><div class="line">            for (int index = 0; index &lt; size; index++)</div><div class="line">              // null值要用==比较</div><div class="line">               if (elementData [index] == null) &#123;</div><div class="line">                  fastRemove(index);</div><div class="line">                  return true;</div><div class="line">              &#125;</div><div class="line">       &#125; else &#123;</div><div class="line">           for (int index = 0; index &lt; size; index++)</div><div class="line">              // 非null当然是用equals比较了</div><div class="line">               if (o.equals(elementData [index])) &#123;</div><div class="line">                  fastRemove(index);</div><div class="line">                  return true;</div><div class="line">              &#125;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /*</div><div class="line">     * Private remove method that skips bounds checking and does not</div><div class="line">     * return the value removed.</div><div class="line">     */</div><div class="line">    private void fastRemove(int index) &#123;</div><div class="line">        modCount++;</div><div class="line">       // 原理和之前的add一样，还是进行数组复制，将index后的元素向前移动一个位置，不细解释了，</div><div class="line">        int numMoved = size - index - 1;</div><div class="line">        if (numMoved &gt; 0)</div><div class="line">            System. arraycopy(elementData, index+1, elementData, index,</div><div class="line">                             numMoved);</div><div class="line">        elementData[--size ] = null; // Let gc do its work</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 数组越界检查</div><div class="line">     */</div><div class="line">    private void RangeCheck(int index) &#123;</div><div class="line">        if (index &gt;= size )</div><div class="line">           throw new IndexOutOfBoundsException(</div><div class="line">               &quot;Index: &quot;+index+&quot;, Size: &quot; +size);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>越界检查</li>
+<li>数组移动</li>
+<li>将删除元素置空, 使对象可被回收</li>
+</ol>
+<h3 id="ArrayList-vs-LinkedList"><a href="#ArrayList-vs-LinkedList" class="headerlink" title="ArrayList vs LinkedList"></a>ArrayList vs LinkedList</h3><ul>
+<li>ArrayList基于动态数组, LinkedList基于双向链表.</li>
+<li>对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。</li>
+<li>对于插入和删除, LinkedList慢在寻址，快在只需要改变前后Entry的引用地址, ArrayList做插入、删除的时候，慢在数组复制和数组扩容，快在寻址. 如果待插入、删除的元素是在数据结构的前半段尤其是非常靠前的位置的时候，LinkedList的效率将大大快过ArrayList，因为ArrayList将批量copy大量的元素.</li>
+<li>ArrayList for快,foreach慢. LinkedList for慢,foreach快. 整体ArrayList更快(foreach使用iterator, for使用random access)</li>
+</ul>
+<h3 id="ArrayList-vs-Vector"><a href="#ArrayList-vs-Vector" class="headerlink" title="ArrayList vs Vector"></a>ArrayList vs Vector</h3><ul>
+<li>Vector和ArrayList几乎是完全相同的,唯一的区别在于Vector是同步类(synchronized)，属于强同步类。因此开销就比ArrayList要大，访问要慢。正常情况下,大多数的Java程序员使用ArrayList而不是Vector,因为同步完全可以由程序员自己来控制。</li>
+<li>Vector每次扩容请求其大小的2倍空间，而ArrayList是1.5倍。</li>
+<li>Vector还有一个子类Stack.</li>
+</ul>
+<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h3 id="确定哈希桶数组索引位置"><a href="#确定哈希桶数组索引位置" class="headerlink" title="确定哈希桶数组索引位置"></a>确定哈希桶数组索引位置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">方法一：</div><div class="line">static final int hash(Object key) &#123;   //jdk1.8 &amp; jdk1.7</div><div class="line">     int h;</div><div class="line">     // h = key.hashCode() 为第一步 取hashCode值</div><div class="line">     // h ^ (h &gt;&gt;&gt; 16)  为第二步 高位参与运算</div><div class="line">     //高低Bit都参与到Hash的计算中</div><div class="line">     return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</div><div class="line">&#125;</div><div class="line">方法二：</div><div class="line">static int indexFor(int h, int length) &#123;  //jdk1.7的源码，jdk1.8没有这个方法，但是实现原理一样的</div><div class="line">     return h &amp; (length-1);  //第三步 取模运算, 由于长度为2的幂次, 取模运算可使用位与运算代替, 提高效率</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="put"><a href="#put" class="headerlink" title="put"></a>put</h3><p><img src="/images/hashmap_put.png" alt=""></p>
+<h3 id="扩容机制"><a href="#扩容机制" class="headerlink" title="扩容机制"></a>扩容机制</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">//JDK7</div><div class="line"></div><div class="line">void resize(int newCapacity) &#123;   //传入新的容量</div><div class="line">    Entry[] oldTable = table;    //引用扩容前的Entry数组</div><div class="line">    int oldCapacity = oldTable.length;         </div><div class="line">    if (oldCapacity == MAXIMUM_CAPACITY) &#123;  //扩容前的数组大小如果已经达到最大(2^30)了</div><div class="line">        threshold = Integer.MAX_VALUE; //修改阈值为int的最大值(2^31-1)，这样以后就不会扩容了</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">    Entry[] newTable = new Entry[newCapacity];  //初始化一个新的Entry数组</div><div class="line">    transfer(newTable);                         //！！将数据转移到新的Entry数组里</div><div class="line">    table = newTable;                           //HashMap的table属性引用新的Entry数组</div><div class="line">    threshold = (int)(newCapacity * loadFactor);//修改阈值</div><div class="line">&#125;</div><div class="line"></div><div class="line">void transfer(Entry[] newTable) &#123;</div><div class="line">    Entry[] src = table;                   //src引用了旧的Entry数组</div><div class="line">    int newCapacity = newTable.length;</div><div class="line">    for (int j = 0; j &lt; src.length; j++) &#123; //遍历旧的Entry数组</div><div class="line">        Entry&lt;K,V&gt; e = src[j];             //取得旧Entry数组的每个元素</div><div class="line">        if (e != null) &#123;</div><div class="line">            src[j] = null;//释放旧Entry数组的对象引用（for循环后，旧的Entry数组不再引用任何对象）</div><div class="line">            do &#123;</div><div class="line">                Entry&lt;K,V&gt; next = e.next;</div><div class="line">                int i = indexFor(e.hash, newCapacity); //！！重新计算每个元素在数组中的位置</div><div class="line">                e.next = newTable[i]; //标记[1]</div><div class="line">                newTable[i] = e;      //将元素放在数组上</div><div class="line">                e = next;             //访问下一个Entry链上的元素</div><div class="line">            &#125; while (e != null);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="JDK8对扩容机制的优化"><a href="#JDK8对扩容机制的优化" class="headerlink" title="JDK8对扩容机制的优化"></a>JDK8对扩容机制的优化</h4><p>不需要像JDK1.7的实现那样重新计算索引. 由于哈希桶数组的长度为2的幂次, 扩展为原来2倍长度时, 元素的位置要么是在原位置，要么是在原位置再移动原来长度的位置。只需要看看原来的hash值新增的那个bit是1还是0就好了，是0的话索引没变，是1的话索引变成“原索引+原长度”.</p>
+<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><h3 id="用分段锁实现多个线程间的并发写操作"><a href="#用分段锁实现多个线程间的并发写操作" class="headerlink" title="用分段锁实现多个线程间的并发写操作"></a>用分段锁实现多个线程间的并发写操作</h3><h3 id="降低读操作对加锁的需求"><a href="#降低读操作对加锁的需求" class="headerlink" title="降低读操作对加锁的需求"></a>降低读操作对加锁的需求</h3><h4 id="用-HashEntery-对象的不变性来保证正在进行的写操作不会影响正在进行的读操作"><a href="#用-HashEntery-对象的不变性来保证正在进行的写操作不会影响正在进行的读操作" class="headerlink" title="用 HashEntery 对象的不变性来保证正在进行的写操作不会影响正在进行的读操作"></a>用 HashEntery 对象的不变性来保证正在进行的写操作不会影响正在进行的读操作</h4><p>HashEntry 中的 key，hash，next 都声明为 final 型。这意味着，不能把节点添加到链接的中间和尾部，也不能在链接的中间和尾部删除节点。这个特性可以保证：在访问某个节点时，这个节点之后的链接不会被改变。对表进行结构性修改时,原有的链表依然存在,不影响正在读的线程</p>
+<h4 id="用-Volatile-变量保证get操作一定能看到已完成的写操作"><a href="#用-Volatile-变量保证get操作一定能看到已完成的写操作" class="headerlink" title="用 Volatile 变量保证get操作一定能看到已完成的写操作"></a>用 Volatile 变量保证get操作一定能看到已完成的写操作</h4><p>在 ConcurrentHashMap 中，所有执行写操作的方法（put, remove, clear），在对链表做结构性修改之后，在退出写方法前都会去写这个 modCount 变量。所有未加锁的读操作（get, contains, containsKey）在读方法中，都会首先去读取这个 modCount 变量。<br>未全部完成的不一能看到.</p>
+<h4 id="依然可能有重排序问题-机率相当小"><a href="#依然可能有重排序问题-机率相当小" class="headerlink" title="依然可能有重排序问题,机率相当小"></a>依然可能有重排序问题,机率相当小</h4><p>同时，HashEntry 类的 value 域被声明为 Volatile 型,但不是final，Java 的内存模型可以保证：某个写线程对 value 域的写入马上可以被后续的某个读线程“看”到。在 ConcurrentHashMap 中，不允许用 null 作为键和值，当读线程读到某个 HashEntry 的 value 域的值为 null 时，便知道产生了冲突——发生了重排序现象，需要加锁后重新读入这个 value 值。这些特性互相配合，使得读线程即使在不加锁状态下，也能正确访问 ConcurrentHashMap。get中有一个readValueUnderLock调用.</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.jianshu.com/p/085a5ba2aca8" target="_blank" rel="external">http://www.jianshu.com/p/085a5ba2aca8</a><br><a href="http://tech.meituan.com/java-hashmap.html" target="_blank" rel="external">http://tech.meituan.com/java-hashmap.html</a><br><a href="https://www.ibm.com/developerworks/cn/java/java-lo-concurrenthashmap/" target="_blank" rel="external">https://www.ibm.com/developerworks/cn/java/java-lo-concurrenthashmap/</a></p>
+
+      
     </div>
     <footer class="article-footer">
-      <a data-url="<%- post.permalink %>" data-id="<%= post._id %>" class="article-share-link"><%= __('share') %></a>
-      <% if (post.comments && config.disqus_shortname){ %>
-        <a href="<%- post.permalink %>#disqus_thread" class="article-comment-link"><%= __('comment') %></a>
-      <% } %>
-      <%- partial('post/tag') %>
+      <a data-url="http://freshergogo.github.io/2017/03/24/Java容器知识点总结/" data-id="cj0rixnpn0001ty5haqb9esex" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习/">学习</a></li></ul>
+
     </footer>
   </div>
-  <% if (!index){ %>
-    <%- partial('post/nav') %>
-  <% } %>
+  
 </article>
 
-<% if (!index && post.comments && config.disqus_shortname){ %>
-<section id="comments">
-  <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  </div>
-</section>
-<% } %>
+
 
   
-    <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %>" itemscope itemprop="blogPost">
+    <article id="post-实习面试总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <%- partial('post/date', {class_name: 'article-date', date_format: null}) %>
-    <%- partial('post/category') %>
+    <a href="/2017/03/22/实习面试总结/" class="article-date">
+  <time datetime="2017-03-22T14:07:58.000Z" itemprop="datePublished">2017-03-22</time>
+</a>
+    
   </div>
   <div class="article-inner">
-    <%- partial('post/gallery') %>
-    <% if (post.link || post.title){ %>
+    
+    
       <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/22/实习面试总结/">实习面试总结</a>
+    </h1>
+  
+
       </header>
-    <% } %>
+    
     <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link){ %>
-          <p class="article-more-link">
-            <a href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %></a>
-          </p>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
+      
+	
+        <h2 id="网易游戏"><a href="#网易游戏" class="headerlink" title="网易游戏"></a>网易游戏</h2><p>时间: 2017/3/16<br>进度: 一面<br>时长: 一个小时多一些<br>形式: 现场单面<br>考查内容</p>
+<ul>
+<li>编码能力</li>
+<li>学习能力</li>
+<li>项目经历</li>
+<li>基础知识</li>
+</ul>
+<p>面试一开始先出一道编程题.<br>一个 M x N 的大矩阵中有一个 m x n 的小矩阵, 大矩阵中小矩阵以外的元素用 0 表示, 小矩阵中的元素用 1 表示,如下<br>0 0 0 0 0 0<br>0 1 1 1 0 0<br>0 1 1 1 0 0<br>0 1 1 1 0 0<br>0 0 0 0 0 0<br>0 0 0 0 0 0<br>小矩阵可在大矩阵中移动,移出边缘的元素会从对边进入,如下是一种移动后的情况<br>1 0 0 0 1 1<br>0 0 0 0 0 0<br>0 0 0 0 0 0<br>0 0 0 0 0 0<br>1 0 0 0 1 1<br>1 0 0 0 1 1<br>输入: M, N, m, n, x1, y1, x2, y2 (x1, y1 为原小矩阵中心点在大矩阵的下标, x2, y2 为移动后小矩阵中心点在大矩阵中的下标)<br>输出: 打印出移动后的整个大矩阵</p>
+<p>接着对刚才的编程题变形, 小矩阵中的元素并不都是 1 , 可以为任意整数.</p>
+<p>编程题做完, 给出几道小题, 在五分钟内利用谷歌进行搜索后回答. 题目如下:</p>
+<ul>
+<li>websocket</li>
+<li>http, tcp 区别?</li>
+<li>各自适用的范围</li>
+</ul>
+<p>接着问项目, 主要问某个功能是怎样实现的, 如何对某个功能进行扩展.</p>
+<p>接着问基础知识, 问了进程调度算法和三次握手,四次挥手.</p>
+<p>不足: 许多问题泛泛而谈, 没有通过仔细思考和组织后再回答. 没有好好利用向面试官提问的机会.</p>
+<h2 id="YY语音"><a href="#YY语音" class="headerlink" title="YY语音"></a>YY语音</h2><p>时间: 2017/3/18<br>进度: 一面, 二面, HR面<br>形式: 现场单面</p>
+<h3 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h3><p>时长: 十来分钟</p>
+<p>根据简历问了几个小题, 只记得两个:</p>
+<ul>
+<li>画一棵b树</li>
+<li>java的char是几个字节, 为什么</li>
+</ul>
+<p>然后询问一些基本情况</p>
+<h3 id="二面"><a href="#二面" class="headerlink" title="二面"></a>二面</h3><p>时长: 半个多钟</p>
+<p>先问项目, 只记得两个问题:</p>
+<ul>
+<li>如何进行技术选型</li>
+<li>如何保证数据安全(由于项目与病历有关, 涉及患者隐私)</li>
+</ul>
+<p>接着问基础知识:</p>
+<ul>
+<li>ConcurrentHashMap原理</li>
+<li>jvm需要将class字节码转换为机器码才能运行, 如何提高效率</li>
+<li>linux的锁机制</li>
+<li>tcp如果发送一个消息, 一直收不到确认, 会不会一直重发</li>
+<li>如何利用http协议上传大文件</li>
+</ul>
+<p>不足: 有些不是很熟悉的问题多思考一下, 有些不懂的问题也可以讲一讲相关的一些知识, 而不是直接说不会或者没做过.</p>
+<h3 id="HR面"><a href="#HR面" class="headerlink" title="HR面"></a>HR面</h3><p>时长: 半小时不到</p>
+<p>主要问学习情况, 专业情况(专业为创新班), 什么时候能实习, 对薪资待遇的要求等等.</p>
+<h2 id="携程"><a href="#携程" class="headerlink" title="携程"></a>携程</h2><h3 id="一面-1"><a href="#一面-1" class="headerlink" title="一面"></a>一面</h3><p>时间: 2017/3/17<br>形式: 电话面试<br>时长: 半个多钟</p>
+<p>先问项目, 对项目使用的框架的一些使用问题<br>主要对简历上的技能方面问各种基础知识</p>
+<p>不足: 回答问题不够言简意赅</p>
+<h3 id="二面-1"><a href="#二面-1" class="headerlink" title="二面"></a>二面</h3><p>时间: 2017/3/21<br>形式: 视频面试(牛客网)<br>时长: 一个小时</p>
+<p>做三道编程题:</p>
+<ol>
+<li>插入排序</li>
+<li>原有链表: L0 -&gt; L1 -&gt; L2 -&gt; … -&gt; Ln, 将链表变成 L0 -&gt; Ln -&gt; L1 -&gt; Ln-1 -&gt; …</li>
+<li>打印 n 位的 gray code, 例如 n = 2, 打印: 00 01 11 10</li>
+</ol>
+<p>总结: 平时多刷 leetcode, 剑指offer 就行</p>
+<h3 id="三面-总监面"><a href="#三面-总监面" class="headerlink" title="三面(总监面)"></a>三面(总监面)</h3><p>时间: 2017/3/24<br>形式: 视频面试(牛客网)<br>时长: 一个小时</p>
+<p>问了很多 HR 问的问题, 比如用两个形容词形容一下你的性格, 实习时间, 薪资待遇等等.<br>项目也问了, 问了主要负责的东西, 答后端, 问了后端给前端提供的接口, 没有详细问.<br>中间面试官问你觉得你还有哪些方面擅长但前面的面试没体现出来的, 然后根据你的回答提问. 我回答说一些并发的基础知识, 问了几道题如下:</p>
+<ul>
+<li>ConcurrentHashMap (简历上写了或者你说了你熟悉这个, 基本必考, 这种知识点比较好准备)</li>
+<li>当进行 Synchronized 时, 会发生什么</li>
+<li>当线程需要多个资源时, 可能会发生什么? 我回答死锁. 接着问如何避免死锁.</li>
+</ul>
+
+      
     </div>
     <footer class="article-footer">
-      <a data-url="<%- post.permalink %>" data-id="<%= post._id %>" class="article-share-link"><%= __('share') %></a>
-      <% if (post.comments && config.disqus_shortname){ %>
-        <a href="<%- post.permalink %>#disqus_thread" class="article-comment-link"><%= __('comment') %></a>
-      <% } %>
-      <%- partial('post/tag') %>
+      <a data-url="http://freshergogo.github.io/2017/03/22/实习面试总结/" data-id="cj0rixnq50005ty5hwvq8p03v" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工作/">工作</a></li></ul>
+
     </footer>
   </div>
-  <% if (!index){ %>
-    <%- partial('post/nav') %>
-  <% } %>
+  
 </article>
 
-<% if (!index && post.comments && config.disqus_shortname){ %>
-<section id="comments">
-  <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  </div>
-</section>
-<% } %>
+
 
   
 
@@ -255,7 +522,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习/">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a></li></ul>
     </div>
@@ -265,7 +532,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/学习/" style="font-size: 20px;">学习</a> <a href="/tags/工作/" style="font-size: 10px;">工作</a>
     </div>
@@ -284,7 +551,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -317,7 +584,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 黄文耿<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
