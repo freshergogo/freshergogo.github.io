@@ -66,103 +66,50 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Java容器知识点总结" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %>" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/24/Java容器知识点总结/" class="article-date">
-  <time datetime="2017-03-24T06:51:14.000Z" itemprop="datePublished">2017-03-24</time>
-</a>
-    
+    <%- partial('post/date', {class_name: 'article-date', date_format: null}) %>
+    <%- partial('post/category') %>
   </div>
   <div class="article-inner">
-    
-    
+    <%- partial('post/gallery') %>
+    <% if (post.link || post.title){ %>
       <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Java容器知识点总结
-    </h1>
-  
-
+        <%- partial('post/title', {class_name: 'article-title'}) %>
       </header>
-    
+    <% } %>
     <div class="article-entry" itemprop="articleBody">
-      
-	
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-    		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ArrayList"><span class="toc-number">1.</span> <span class="toc-text">ArrayList</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayList-源码阅读"><span class="toc-number">1.1.</span> <span class="toc-text">ArrayList 源码阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#增加"><span class="toc-number">1.1.1.</span> <span class="toc-text">增加</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除"><span class="toc-number">1.1.2.</span> <span class="toc-text">删除</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayList-vs-LinkedList"><span class="toc-number">1.2.</span> <span class="toc-text">ArrayList vs LinkedList</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayList-vs-Vector"><span class="toc-number">1.3.</span> <span class="toc-text">ArrayList vs Vector</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashMap"><span class="toc-number">2.</span> <span class="toc-text">HashMap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#确定哈希桶数组索引位置"><span class="toc-number">2.1.</span> <span class="toc-text">确定哈希桶数组索引位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#put"><span class="toc-number">2.2.</span> <span class="toc-text">put</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#扩容机制"><span class="toc-number">2.3.</span> <span class="toc-text">扩容机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JDK8对扩容机制的优化"><span class="toc-number">2.3.1.</span> <span class="toc-text">JDK8对扩容机制的优化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ConcurrentHashMap"><span class="toc-number">3.</span> <span class="toc-text">ConcurrentHashMap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用分段锁实现多个线程间的并发写操作"><span class="toc-number">3.1.</span> <span class="toc-text">用分段锁实现多个线程间的并发写操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#降低读操作对加锁的需求"><span class="toc-number">3.2.</span> <span class="toc-text">降低读操作对加锁的需求</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用-HashEntery-对象的不变性来保证正在进行的写操作不会影响正在进行的读操作"><span class="toc-number">3.2.1.</span> <span class="toc-text">用 HashEntery 对象的不变性来保证正在进行的写操作不会影响正在进行的读操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用-Volatile-变量保证get操作一定能看到已完成的写操作"><span class="toc-number">3.2.2.</span> <span class="toc-text">用 Volatile 变量保证get操作一定能看到已完成的写操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#依然可能有重排序问题-机率相当小"><span class="toc-number">3.2.3.</span> <span class="toc-text">依然可能有重排序问题,机率相当小</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">4.</span> <span class="toc-text">参考</span></a></li></ol>
-		</div>
-	
-        <p><img src="/images/java_collections.png" alt="java 集合框架"></p>
-<h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><h3 id="ArrayList-源码阅读"><a href="#ArrayList-源码阅读" class="headerlink" title="ArrayList 源码阅读"></a>ArrayList 源码阅读</h3><h4 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">     * 添加一个元素</div><div class="line">     */</div><div class="line">    public boolean add(E e) &#123;</div><div class="line">       // 进行扩容检查</div><div class="line">       ensureCapacity( size + 1);  // Increments modCount</div><div class="line">       // 将e增加至list的数据尾部，容量+1</div><div class="line">        elementData[size ++] = e;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 在指定位置添加一个元素</div><div class="line">     */</div><div class="line">    public void add(int index, E element) &#123;</div><div class="line">        // 判断索引是否越界，这里会抛出多么熟悉的异常。。。</div><div class="line">        if (index &gt; size || index &lt; 0)</div><div class="line">           throw new IndexOutOfBoundsException(</div><div class="line">               &quot;Index: &quot;+index+&quot;, Size: &quot; +size);</div><div class="line"></div><div class="line">       // 进行扩容检查</div><div class="line">       ensureCapacity( size+1);  // Increments modCount  </div><div class="line">       // 对数组进行复制处理，目的就是空出index的位置插入element，并将index后的元素位移一个位置</div><div class="line">       System. arraycopy(elementData, index, elementData, index + 1,</div><div class="line">                      size - index);</div><div class="line">       // 将指定的index位置赋值为element</div><div class="line">        elementData[index] = element;</div><div class="line">       // list容量+1</div><div class="line">        size++;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * 增加一个集合元素</div><div class="line">     */</div><div class="line">    public boolean addAll(Collection&lt;? extends E&gt; c) &#123;</div><div class="line">       //将c转换为数组</div><div class="line">       Object[] a = c.toArray();</div><div class="line">        int numNew = a.length ;</div><div class="line">       //扩容检查</div><div class="line">       ensureCapacity( size + numNew);  // Increments modCount</div><div class="line">       //将c添加至list的数据尾部</div><div class="line">        System. arraycopy(a, 0, elementData, size, numNew);</div><div class="line">       //更新当前容器大小</div><div class="line">        size += numNew;</div><div class="line">        return numNew != 0;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * 在指定位置，增加一个集合元素</div><div class="line">     */</div><div class="line">    public boolean addAll(int index, Collection&lt;? extends E&gt; c) &#123;</div><div class="line">        if (index &gt; size || index &lt; 0)</div><div class="line">           throw new IndexOutOfBoundsException(</div><div class="line">               &quot;Index: &quot; + index + &quot;, Size: &quot; + size);</div><div class="line"></div><div class="line">       Object[] a = c.toArray();</div><div class="line">        int numNew = a.length ;</div><div class="line">       ensureCapacity( size + numNew);  // Increments modCount</div><div class="line"></div><div class="line">       // 计算需要移动的长度（index之后的元素个数）</div><div class="line">        int numMoved = size - index;</div><div class="line">       // 数组复制，空出第index到index+numNum的位置，即将数组index后的元素向右移动numNum个位置</div><div class="line">        if (numMoved &gt; 0)</div><div class="line">           System. arraycopy(elementData, index, elementData, index + numNew,</div><div class="line">                          numMoved);</div><div class="line"></div><div class="line">       // 将要插入的集合元素复制到数组空出的位置中</div><div class="line">        System. arraycopy(a, 0, elementData, index, numNew);</div><div class="line">        size += numNew;</div><div class="line">        return numNew != 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 数组容量检查，不够时则进行扩容</div><div class="line">     */</div><div class="line">   public void ensureCapacity( int minCapacity) &#123;</div><div class="line">        modCount++;</div><div class="line">       // 当前数组的长度</div><div class="line">        int oldCapacity = elementData .length;</div><div class="line">       // 最小需要的容量大于当前数组的长度则进行扩容</div><div class="line">        if (minCapacity &gt; oldCapacity) &#123;</div><div class="line">           Object oldData[] = elementData;</div><div class="line">          // 新扩容的数组长度为旧容量的1.5倍+1</div><div class="line">           int newCapacity = (oldCapacity * 3)/2 + 1;</div><div class="line">          // 如果新扩容的数组长度还是比最小需要的容量小，则以最小需要的容量为长度进行扩容</div><div class="line">           if (newCapacity &lt; minCapacity)</div><div class="line">              newCapacity = minCapacity;</div><div class="line">            // minCapacity is usually close to size, so this is a win:</div><div class="line">            // 进行数据拷贝，Arrays.copyOf底层实现是System.arrayCopy()</div><div class="line">            elementData = Arrays.copyOf( elementData, newCapacity);</div><div class="line">       &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>如果在某个 index 插入, 先进行越界检查.</li>
-<li>扩容检查</li>
-<li>如果在中间插入, 需要进行数组移动</li>
-<li>插入数据</li>
-</ol>
-<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">     * 根据索引位置删除元素</div><div class="line">     */</div><div class="line">    public E remove( int index) &#123;</div><div class="line">      // 数组越界检查</div><div class="line">       RangeCheck(index);</div><div class="line"></div><div class="line">        modCount++;</div><div class="line">      // 取出要删除位置的元素，供返回使用</div><div class="line">       E oldValue = (E) elementData[index];</div><div class="line">       // 计算数组要复制的数量</div><div class="line">        int numMoved = size - index - 1;</div><div class="line">       // 数组复制，就是将index之后的元素往前移动一个位置</div><div class="line">        if (numMoved &gt; 0)</div><div class="line">           System. arraycopy(elementData, index+1, elementData, index,</div><div class="line">                          numMoved);</div><div class="line">       // 将数组最后一个元素置空（因为删除了一个元素，然后index后面的元素都向前移动了，所以最后一个就没用了），好让gc尽快回收</div><div class="line">       // 不要忘了size减一</div><div class="line">        elementData[--size ] = null; // Let gc do its work</div><div class="line"></div><div class="line">        return oldValue;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 根据元素内容删除，只删除匹配的第一个</div><div class="line">     */</div><div class="line">    public boolean remove(Object o) &#123;</div><div class="line">       // 对要删除的元素进行null判断</div><div class="line">       // 对数据元素进行遍历查找，知道找到第一个要删除的元素，删除后进行返回，如果要删除的元素正好是最后一个那就惨了，时间复杂度可达O(n) 。。。</div><div class="line">        if (o == null) &#123;</div><div class="line">            for (int index = 0; index &lt; size; index++)</div><div class="line">              // null值要用==比较</div><div class="line">               if (elementData [index] == null) &#123;</div><div class="line">                  fastRemove(index);</div><div class="line">                  return true;</div><div class="line">              &#125;</div><div class="line">       &#125; else &#123;</div><div class="line">           for (int index = 0; index &lt; size; index++)</div><div class="line">              // 非null当然是用equals比较了</div><div class="line">               if (o.equals(elementData [index])) &#123;</div><div class="line">                  fastRemove(index);</div><div class="line">                  return true;</div><div class="line">              &#125;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /*</div><div class="line">     * Private remove method that skips bounds checking and does not</div><div class="line">     * return the value removed.</div><div class="line">     */</div><div class="line">    private void fastRemove(int index) &#123;</div><div class="line">        modCount++;</div><div class="line">       // 原理和之前的add一样，还是进行数组复制，将index后的元素向前移动一个位置，不细解释了，</div><div class="line">        int numMoved = size - index - 1;</div><div class="line">        if (numMoved &gt; 0)</div><div class="line">            System. arraycopy(elementData, index+1, elementData, index,</div><div class="line">                             numMoved);</div><div class="line">        elementData[--size ] = null; // Let gc do its work</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 数组越界检查</div><div class="line">     */</div><div class="line">    private void RangeCheck(int index) &#123;</div><div class="line">        if (index &gt;= size )</div><div class="line">           throw new IndexOutOfBoundsException(</div><div class="line">               &quot;Index: &quot;+index+&quot;, Size: &quot; +size);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>越界检查</li>
-<li>数组移动</li>
-<li>将删除元素置空, 使对象可被回收</li>
-</ol>
-<h3 id="ArrayList-vs-LinkedList"><a href="#ArrayList-vs-LinkedList" class="headerlink" title="ArrayList vs LinkedList"></a>ArrayList vs LinkedList</h3><ul>
-<li>ArrayList基于动态数组, LinkedList基于双向链表.</li>
-<li>对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。</li>
-<li>对于插入和删除, LinkedList慢在寻址，快在只需要改变前后Entry的引用地址, ArrayList做插入、删除的时候，慢在数组复制和数组扩容，快在寻址. 如果待插入、删除的元素是在数据结构的前半段尤其是非常靠前的位置的时候，LinkedList的效率将大大快过ArrayList，因为ArrayList将批量copy大量的元素.</li>
-<li>ArrayList for快,foreach慢. LinkedList for慢,foreach快. 整体ArrayList更快(foreach使用iterator, for使用random access)</li>
-</ul>
-<h3 id="ArrayList-vs-Vector"><a href="#ArrayList-vs-Vector" class="headerlink" title="ArrayList vs Vector"></a>ArrayList vs Vector</h3><ul>
-<li>Vector和ArrayList几乎是完全相同的,唯一的区别在于Vector是同步类(synchronized)，属于强同步类。因此开销就比ArrayList要大，访问要慢。正常情况下,大多数的Java程序员使用ArrayList而不是Vector,因为同步完全可以由程序员自己来控制。</li>
-<li>Vector每次扩容请求其大小的2倍空间，而ArrayList是1.5倍。</li>
-<li>Vector还有一个子类Stack.</li>
-</ul>
-<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h3 id="确定哈希桶数组索引位置"><a href="#确定哈希桶数组索引位置" class="headerlink" title="确定哈希桶数组索引位置"></a>确定哈希桶数组索引位置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">方法一：</div><div class="line">static final int hash(Object key) &#123;   //jdk1.8 &amp; jdk1.7</div><div class="line">     int h;</div><div class="line">     // h = key.hashCode() 为第一步 取hashCode值</div><div class="line">     // h ^ (h &gt;&gt;&gt; 16)  为第二步 高位参与运算</div><div class="line">     //高低Bit都参与到Hash的计算中</div><div class="line">     return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</div><div class="line">&#125;</div><div class="line">方法二：</div><div class="line">static int indexFor(int h, int length) &#123;  //jdk1.7的源码，jdk1.8没有这个方法，但是实现原理一样的</div><div class="line">     return h &amp; (length-1);  //第三步 取模运算, 由于长度为2的幂次, 取模运算可使用位与运算代替, 提高效率</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="put"><a href="#put" class="headerlink" title="put"></a>put</h3><p><img src="/images/hashmap_put.png" alt=""></p>
-<h3 id="扩容机制"><a href="#扩容机制" class="headerlink" title="扩容机制"></a>扩容机制</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">//JDK7</div><div class="line"></div><div class="line">void resize(int newCapacity) &#123;   //传入新的容量</div><div class="line">    Entry[] oldTable = table;    //引用扩容前的Entry数组</div><div class="line">    int oldCapacity = oldTable.length;         </div><div class="line">    if (oldCapacity == MAXIMUM_CAPACITY) &#123;  //扩容前的数组大小如果已经达到最大(2^30)了</div><div class="line">        threshold = Integer.MAX_VALUE; //修改阈值为int的最大值(2^31-1)，这样以后就不会扩容了</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">    Entry[] newTable = new Entry[newCapacity];  //初始化一个新的Entry数组</div><div class="line">    transfer(newTable);                         //！！将数据转移到新的Entry数组里</div><div class="line">    table = newTable;                           //HashMap的table属性引用新的Entry数组</div><div class="line">    threshold = (int)(newCapacity * loadFactor);//修改阈值</div><div class="line">&#125;</div><div class="line"></div><div class="line">void transfer(Entry[] newTable) &#123;</div><div class="line">    Entry[] src = table;                   //src引用了旧的Entry数组</div><div class="line">    int newCapacity = newTable.length;</div><div class="line">    for (int j = 0; j &lt; src.length; j++) &#123; //遍历旧的Entry数组</div><div class="line">        Entry&lt;K,V&gt; e = src[j];             //取得旧Entry数组的每个元素</div><div class="line">        if (e != null) &#123;</div><div class="line">            src[j] = null;//释放旧Entry数组的对象引用（for循环后，旧的Entry数组不再引用任何对象）</div><div class="line">            do &#123;</div><div class="line">                Entry&lt;K,V&gt; next = e.next;</div><div class="line">                int i = indexFor(e.hash, newCapacity); //！！重新计算每个元素在数组中的位置</div><div class="line">                e.next = newTable[i]; //标记[1]</div><div class="line">                newTable[i] = e;      //将元素放在数组上</div><div class="line">                e = next;             //访问下一个Entry链上的元素</div><div class="line">            &#125; while (e != null);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="JDK8对扩容机制的优化"><a href="#JDK8对扩容机制的优化" class="headerlink" title="JDK8对扩容机制的优化"></a>JDK8对扩容机制的优化</h4><p>不需要像JDK1.7的实现那样重新计算索引. 由于哈希桶数组的长度为2的幂次, 扩展为原来2倍长度时, 元素的位置要么是在原位置，要么是在原位置再移动原来长度的位置。只需要看看原来的hash值新增的那个bit是1还是0就好了，是0的话索引没变，是1的话索引变成“原索引+原长度”.</p>
-<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><h3 id="用分段锁实现多个线程间的并发写操作"><a href="#用分段锁实现多个线程间的并发写操作" class="headerlink" title="用分段锁实现多个线程间的并发写操作"></a>用分段锁实现多个线程间的并发写操作</h3><h3 id="降低读操作对加锁的需求"><a href="#降低读操作对加锁的需求" class="headerlink" title="降低读操作对加锁的需求"></a>降低读操作对加锁的需求</h3><h4 id="用-HashEntery-对象的不变性来保证正在进行的写操作不会影响正在进行的读操作"><a href="#用-HashEntery-对象的不变性来保证正在进行的写操作不会影响正在进行的读操作" class="headerlink" title="用 HashEntery 对象的不变性来保证正在进行的写操作不会影响正在进行的读操作"></a>用 HashEntery 对象的不变性来保证正在进行的写操作不会影响正在进行的读操作</h4><p>HashEntry 中的 key，hash，next 都声明为 final 型。这意味着，不能把节点添加到链接的中间和尾部，也不能在链接的中间和尾部删除节点。这个特性可以保证：在访问某个节点时，这个节点之后的链接不会被改变。对表进行结构性修改时,原有的链表依然存在,不影响正在读的线程</p>
-<h4 id="用-Volatile-变量保证get操作一定能看到已完成的写操作"><a href="#用-Volatile-变量保证get操作一定能看到已完成的写操作" class="headerlink" title="用 Volatile 变量保证get操作一定能看到已完成的写操作"></a>用 Volatile 变量保证get操作一定能看到已完成的写操作</h4><p>在 ConcurrentHashMap 中，所有执行写操作的方法（put, remove, clear），在对链表做结构性修改之后，在退出写方法前都会去写这个 modCount 变量。所有未加锁的读操作（get, contains, containsKey）在读方法中，都会首先去读取这个 modCount 变量。<br>未全部完成的不一能看到.</p>
-<h4 id="依然可能有重排序问题-机率相当小"><a href="#依然可能有重排序问题-机率相当小" class="headerlink" title="依然可能有重排序问题,机率相当小"></a>依然可能有重排序问题,机率相当小</h4><p>同时，HashEntry 类的 value 域被声明为 Volatile 型,但不是final，Java 的内存模型可以保证：某个写线程对 value 域的写入马上可以被后续的某个读线程“看”到。在 ConcurrentHashMap 中，不允许用 null 作为键和值，当读线程读到某个 HashEntry 的 value 域的值为 null 时，便知道产生了冲突——发生了重排序现象，需要加锁后重新读入这个 value 值。这些特性互相配合，使得读线程即使在不加锁状态下，也能正确访问 ConcurrentHashMap。get中有一个readValueUnderLock调用.</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.jianshu.com/p/085a5ba2aca8" target="_blank" rel="external">http://www.jianshu.com/p/085a5ba2aca8</a><br><a href="http://tech.meituan.com/java-hashmap.html" target="_blank" rel="external">http://tech.meituan.com/java-hashmap.html</a><br><a href="https://www.ibm.com/developerworks/cn/java/java-lo-concurrenthashmap/" target="_blank" rel="external">https://www.ibm.com/developerworks/cn/java/java-lo-concurrenthashmap/</a></p>
-
-      
+      <% if (post.excerpt && index){ %>
+        <%- post.excerpt %>
+        <% if (theme.excerpt_link){ %>
+          <p class="article-more-link">
+            <a href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %></a>
+          </p>
+        <% } %>
+      <% } else { %>
+        <%- post.content %>
+      <% } %>
     </div>
     <footer class="article-footer">
-      <a data-url="http://freshergogo.github.io/2017/03/24/Java容器知识点总结/" data-id="cj0rixnpn0001ty5haqb9esex" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习/">学习</a></li></ul>
-
+      <a data-url="<%- post.permalink %>" data-id="<%= post._id %>" class="article-share-link"><%= __('share') %></a>
+      <% if (post.comments && config.disqus_shortname){ %>
+        <a href="<%- post.permalink %>#disqus_thread" class="article-comment-link"><%= __('comment') %></a>
+      <% } %>
+      <%- partial('post/tag') %>
     </footer>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2017/03/25/jvm知识点总结/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          jvm知识点总结
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/03/22/实习面试总结/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">实习面试总结</div>
-    </a>
-  
-</nav>
-
-  
+  <% if (!index){ %>
+    <%- partial('post/nav') %>
+  <% } %>
 </article>
 
-
+<% if (!index && post.comments && config.disqus_shortname){ %>
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+<% } %>
 
 </section>
         
@@ -175,7 +122,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习/">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习/">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a></li></ul>
     </div>
   </div>
 
@@ -185,7 +132,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/学习/" style="font-size: 20px;">学习</a> <a href="/tags/工作/" style="font-size: 10px;">工作</a>
+      <a href="/tags/concurrent/" style="font-size: 10px;">concurrent</a> <a href="/tags/学习/" style="font-size: 20px;">学习</a> <a href="/tags/工作/" style="font-size: 10px;">工作</a>
     </div>
   </div>
 
@@ -205,6 +152,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/03/29/java-concurrent包简介/">java concurrent包简介</a>
+          </li>
         
           <li>
             <a href="/2017/03/27/spring基础一/">spring基础一</a>

@@ -3,43 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>spring基础一 | freshergogo</title>
+  <title>Tag: concurrent | freshergogo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="什么是 springSpring 是一个为了解决企业应用程序开发复杂性而创建的 Java 开源框架。
-hello world
-打开 intellij idea
-新建 spring 项目: file -&amp;gt; new -&amp;gt; project, 选择 spring, next -&amp;gt; finish
-在 src 文件夹下添加三个文件
-
-HelloWorld class
-123456789">
-<meta property="og:type" content="article">
-<meta property="og:title" content="spring基础一">
-<meta property="og:url" content="http://freshergogo.github.io/2017/03/27/spring基础一/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="freshergogo">
+<meta property="og:url" content="http://freshergogo.github.io/tags/concurrent/index.html">
 <meta property="og:site_name" content="freshergogo">
-<meta property="og:description" content="什么是 springSpring 是一个为了解决企业应用程序开发复杂性而创建的 Java 开源框架。
-hello world
-打开 intellij idea
-新建 spring 项目: file -&amp;gt; new -&amp;gt; project, 选择 spring, next -&amp;gt; finish
-在 src 文件夹下添加三个文件
-
-HelloWorld class
-123456789">
-<meta property="og:image" content="http://freshergogo.github.io/images/springcontainer.jpg">
-<meta property="og:image" content="http://freshergogo.github.io/images/齿轮_耦合关系_full.jpg">
-<meta property="og:image" content="http://freshergogo.github.io/images/齿轮_解耦合_full.jpg">
-<meta property="og:updated_time" content="2017-03-27T02:58:15.375Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spring基础一">
-<meta name="twitter:description" content="什么是 springSpring 是一个为了解决企业应用程序开发复杂性而创建的 Java 开源框架。
-hello world
-打开 intellij idea
-新建 spring 项目: file -&amp;gt; new -&amp;gt; project, 选择 spring, next -&amp;gt; finish
-在 src 文件夹下添加三个文件
-
-HelloWorld class
-123456789">
-<meta name="twitter:image" content="http://freshergogo.github.io/images/springcontainer.jpg">
+<meta name="twitter:title" content="freshergogo">
   
     <link rel="alternate" href="/atom.xml" title="freshergogo" type="application/atom+xml">
   
@@ -88,50 +59,39 @@ HelloWorld class
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %>" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <%- partial('post/date', {class_name: 'article-date', date_format: null}) %>
-    <%- partial('post/category') %>
-  </div>
-  <div class="article-inner">
-    <%- partial('post/gallery') %>
-    <% if (post.link || post.title){ %>
-      <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
-      </header>
-    <% } %>
-    <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link){ %>
-          <p class="article-more-link">
-            <a href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %></a>
-          </p>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
-    </div>
-    <footer class="article-footer">
-      <a data-url="<%- post.permalink %>" data-id="<%= post._id %>" class="article-share-link"><%= __('share') %></a>
-      <% if (post.comments && config.disqus_shortname){ %>
-        <a href="<%- post.permalink %>#disqus_thread" class="article-comment-link"><%= __('comment') %></a>
-      <% } %>
-      <%- partial('post/tag') %>
-    </footer>
-  </div>
-  <% if (!index){ %>
-    <%- partial('post/nav') %>
-  <% } %>
-</article>
+        <section id="main">
+  
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/03/29/java-concurrent包简介/" class="archive-article-date">
+  <time datetime="2017-03-29T13:19:40.000Z" itemprop="datePublished">Mar 29</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/03/29/java-concurrent包简介/">java concurrent包简介</a>
+    </h1>
+  
 
-<% if (!index && post.comments && config.disqus_shortname){ %>
-<section id="comments">
-  <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </header>
   </div>
-</section>
-<% } %>
+</article>
+  
+  
+    </div></section>
+  
 
 </section>
         
