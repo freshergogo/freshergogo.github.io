@@ -114,11 +114,184 @@ Redis
   </div>
 </header>
       <div class="outer">
-        <section id="main"><div id="toc" class="toc-article">
-    <div class="toc-title">目录</div>
-    <%- toc(page.content, {list_number: false}) %>
-</div>
-<%- partial('_partial/article', {post: page, index: false}) %>
+        <section id="main"><article id="post-redis简介" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/02/redis简介/" class="article-date">
+  <time datetime="2017-04-02T14:09:00.000Z" itemprop="datePublished">2017-04-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      redis简介
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+	
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+    		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是-redis"><span class="toc-number">1.</span> <span class="toc-text">什么是 redis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据淘汰机制"><span class="toc-number">2.</span> <span class="toc-text">数据淘汰机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#持久化"><span class="toc-number">3.</span> <span class="toc-text">持久化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制"><span class="toc-number">4.</span> <span class="toc-text">主从复制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-number">5.</span> <span class="toc-text">事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令"><span class="toc-number">5.1.</span> <span class="toc-text">命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ACID"><span class="toc-number">5.2.</span> <span class="toc-text">ACID</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哨兵"><span class="toc-number">6.</span> <span class="toc-text">哨兵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集群"><span class="toc-number">7.</span> <span class="toc-text">集群</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis-Cluster"><span class="toc-number">7.1.</span> <span class="toc-text">Redis Cluster</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#槽"><span class="toc-number">7.1.1.</span> <span class="toc-text">槽</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据分片"><span class="toc-number">7.1.2.</span> <span class="toc-text">数据分片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#节点的槽指派信息"><span class="toc-number">7.1.3.</span> <span class="toc-text">节点的槽指派信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#请求重定向"><span class="toc-number">7.1.4.</span> <span class="toc-text">请求重定向</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据迁移"><span class="toc-number">7.1.5.</span> <span class="toc-text">数据迁移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通信故障"><span class="toc-number">7.1.6.</span> <span class="toc-text">通信故障</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis-Sharding集群"><span class="toc-number">7.2.</span> <span class="toc-text">Redis Sharding集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#twemproxy"><span class="toc-number">7.3.</span> <span class="toc-text">twemproxy</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用"><span class="toc-number">8.</span> <span class="toc-text">应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">9.</span> <span class="toc-text">参考</span></a></li></ol>
+		</div>
+	
+        <h2 id="什么是-redis"><a href="#什么是-redis" class="headerlink" title="什么是 redis"></a>什么是 redis</h2><p>redis 可以用来构建一个缓存系统. 它本质是内存里的一个哈希表, 可以用来提高查询性能, 又具有持久化的能力, 可以当做数据库使用.</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>数据存储类型</th>
+<th>查询类型</th>
+<th>附加功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Redis</td>
+<td>使用内存存储（in-memory） 的非关系数据库</td>
+<td>字符串、列表、集合、散列表、有序集合</td>
+<td>每种数据类型都有自己的专属命令， 另外还有批量操作（bulk operation）和不完全（partial）的事务支持</td>
+<td>发布与订阅， 主从复制（master/slave replication）， 持久化， 脚本（存储过程，stored procedure）</td>
+</tr>
+<tr>
+<td>memcached</td>
+<td>使用内存存储的键值缓存</td>
+<td>键值之间的映射</td>
+<td>创建命令、读取命令、更新命令、删除命令以及其他几个命令</td>
+<td>为提升性能而设的多线程服务器</td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td>关系数据库</td>
+<td>每个数据库可以包含多个表， 每个表可以包含多个行； 可以处理多个表的视图（view）； 支持空间（spatial）和第三方扩展</td>
+<td>SELECT 、 INSERT 、 UPDATE 、 DELETE 、函数、存储过程</td>
+<td>支持ACID性质（需要使用InnoDB）， 主从复制和主主复制 （master/master replication）</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>关系数据库</td>
+<td>每个数据库可以包含多个表， 每个表可以包含多个行； 可以处理多个表的视图； 支持空间和第三方扩展；支持可定制类型</td>
+<td>SELECT 、 INSERT 、 UPDATE 、 DELETE 、内置函数、自定义的存储过程</td>
+<td>支持ACID性质，主从复制， 由第三方支持的多主复制 （multi-master replication）</td>
+</tr>
+<tr>
+<td>MongoDb</td>
+<td>使用硬盘存储（on-disk）的非关系文档存储</td>
+<td>每个数据库可以包含多个表， 每个表可以包含多个无schema （schema-less）的BSON文档</td>
+<td>创建命令、读取命令、更新命令、删除命令、条件查询命令，等等</td>
+<td>支持map-reduce操作，主从复制，分片， 空间索引（spatial index）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="数据淘汰机制"><a href="#数据淘汰机制" class="headerlink" title="数据淘汰机制"></a>数据淘汰机制</h2><ul>
+<li>volatile-lru：从已设置过期时间的数据集（server.db[i].expires）中挑选最近最少使用 的数据淘汰</li>
+<li>volatile-ttl：从已设置过期时间的数据集（server.db[i].expires）中挑选将要过期的数 据淘汰</li>
+<li>volatile-random：从已设置过期时间的数据集（server.db[i].expires）中任意选择数据 淘汰</li>
+<li>allkeys-lru：从数据集（server.db[i].dict）中挑选最近最少使用的数据淘汰</li>
+<li>allkeys-random：从数据集（server.db[i].dict）中任意选择数据淘汰</li>
+<li>no-enviction（驱逐）：禁止驱逐数据</li>
+</ul>
+<h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><p><a href="https://segmentfault.com/a/1190000002906345" target="_blank" rel="external">https://segmentfault.com/a/1190000002906345</a></p>
+<h2 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h2><p><img src="/images/redis_republication.png" alt=""><br><img src="/images/redis_master_slave.jpg" alt=""></p>
+<p>特点:</p>
+<ol>
+<li>master可以有多个slave</li>
+<li>除了多个slave连到相同的master外，slave也可以连接其他slave形成图状结构</li>
+<li>主从复制不会阻塞master。也就是说当一个或多个slave与master进行初次同步数据时，master可以继续处理client发来的请求。相反slave在初次同步数据时则会阻塞不能处理client的请求。</li>
+<li>主从复制可以用来提高系统的可伸缩性,我们可以用多个slave 专门用于client的读请求，比如sort操作可以使用slave来处理。也可以用来做简单的数据冗余</li>
+<li>可以在master禁用数据持久化，只需要注释掉master 配置文件中的所有save配置，然后只在slave上配置数据持久化。</li>
+</ol>
+<p>主从刚刚连接的时候，进行全同步；全同步结束后，进行部分同步。如果有需要，slave 在任何时候都可以发起全同步。</p>
+<p>全同步:</p>
+<ol>
+<li>slave建立和master的连接，然后发送sync命令.</li>
+<li>master都会启动一个后台进程，将数据库快照保存到文件中,同时master主进程会开始收集新的写命令并缓存起来。</li>
+<li>后台进程完成写文件后，master就发送文件给slave</li>
+<li>slave将文件保存到磁盘上，然后加载到内存恢复数据库快照到slave上。</li>
+<li>接着master就会把缓存的命令转发给slave.</li>
+<li>slave用接收到的命令更新数据</li>
+</ol>
+<p>部分同步:</p>
+<ol>
+<li>slave连接master后，会主动发起 PSYNC 命令</li>
+<li>slave会提供 master_runid 和offset，master验证 master_runid 和 offset 是否有效？验证通过则，进行部分同步</li>
+<li>master返回 +CONTINUE（从机接收后会注册积压数据接收事件），接着发送已缓存的写命令。</li>
+</ol>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><ul>
+<li>MULTI，告诉 Redis 服务器开启一个事务。注意，只是开启，而不是执行</li>
+<li>EXEC，告诉 Redis 开始执行事务</li>
+<li>DISCARD，告诉 Redis 取消事务</li>
+<li>WATCH，监视某一个键值对，它的作用是在事务执行之前如果监视的键值被修改，事务会被取消。使 Redis 拥有 check-and-set(CAS) 的特性。CAS 的意思是，一个客户端在修改某个值之前，要检测它是否更改；如果没有更改，修改操作才能成功。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&gt; MULTI</div><div class="line">OK</div><div class="line">&gt; INCR foo</div><div class="line">QUEUED</div><div class="line">&gt; INCR bar</div><div class="line">QUEUED</div><div class="line">&gt; EXEC</div><div class="line">1) (integer) 1</div><div class="line">2) (integer) 1</div></pre></td></tr></table></figure>
+<h3 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h3><ul>
+<li>原子性: 当命令入队发生错误时, 整个整务不会被执行; 当执行 Exec 时发生错误, 不会回滚.</li>
+<li>一致性</li>
+<li>隔离性: redis 为单进程单线程, 事务之中不会被插入其他请求, 保证隔离性</li>
+<li>持久性: 不完全, 跟具体的持久化策略有关</li>
+</ul>
+<h2 id="哨兵"><a href="#哨兵" class="headerlink" title="哨兵"></a>哨兵</h2><p>Redis-sentinel的作用是中心节点的工作，监控各个其他节点的工作情况并且进行故障恢复(如选举新主机等)，来提高集群的高可用性。</p>
+<h2 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h2><h3 id="Redis-Cluster"><a href="#Redis-Cluster" class="headerlink" title="Redis Cluster"></a>Redis Cluster</h3><p>服务器 sharding 技术</p>
+<h4 id="槽"><a href="#槽" class="headerlink" title="槽"></a>槽</h4><p>Redis Cluster中有一个16384长度的槽的概念，他们的编号为0、1、2、3……16382、16383。这个槽是一个虚拟的槽，并不是真正存在的。正常工作的时候，Redis Cluster中的每个Master节点都会负责一部分的槽，当有某个key被映射到某个Master负责的槽，那么这个Master负责为这个key提供服务，至于哪个Master节点负责哪个槽，这是可以由用户指定的，也可以在初始化的时候自动生成（redis-trib.rb脚本）。这里值得一提的是，在Redis Cluster中，只有Master才拥有槽的所有权，如果是某个Master的slave，这个slave只负责槽的使用，但是没有所有权。</p>
+<h4 id="数据分片"><a href="#数据分片" class="headerlink" title="数据分片"></a>数据分片</h4><p>在Redis Cluster中，拥有16384个slot，这个数是固定的，存储在Redis Cluster中的所有的键都会被映射到这些slot中。数据库中的每个键都属于这16384个哈希槽的其中一个，集群使用公式CRC16(key) % 16384来计算键key属于哪个槽，其中CRC16(key)语句用于计算键key的CRC16校验和。集群中的每个节点负责处理一部分哈希槽。</p>
+<h4 id="节点的槽指派信息"><a href="#节点的槽指派信息" class="headerlink" title="节点的槽指派信息"></a>节点的槽指派信息</h4><p>clusterNode结构的slots属性和numslot属性记录了节点负责处理那些槽</p>
+<h4 id="请求重定向"><a href="#请求重定向" class="headerlink" title="请求重定向"></a>请求重定向</h4><ul>
+<li>请求的key对应的槽不在该节点上，节点将查看自身内部所保存的哈希槽到节点ID的映射记录，节点回复一个MOVED错误。客户端进行再次重试。</li>
+<li>请求的key对应的槽目前的状态属于MIGRATING状态，并且当前节点找不到这个key了，节点回    复ASK错误。ASK会把对应槽的IMPORTING节点返回给你，告诉你去IMPORTING的节点尝试找找。客户端进行重试首先发送ASKING命令，节点将为客户端设置一个一次性的标志（flag），使得 客户端可以执行一次针对IMPORTING状态的槽的命令请求，然后再发送真正的命令请求。</li>
+</ul>
+<h4 id="数据迁移"><a href="#数据迁移" class="headerlink" title="数据迁移"></a>数据迁移</h4><p>当槽x从Node A向Node B迁移时，Node A和Node B都会有这个槽x，Node A上槽x的状态设置为MIGRATING，Node B上槽x的状态被设置为IMPORTING。</p>
+<h4 id="通信故障"><a href="#通信故障" class="headerlink" title="通信故障"></a>通信故障</h4><ul>
+<li>集群中的每个节点都会定期地向集群中的其他节点发送PING消息，以此交换各个节点状态信息，检测各个节点状态：在线状态、疑似下线状态PFAIL、已下线状态FAIL。将node标记为FAIL需要满足以下两个条件：<ol>
+<li>有半数以上的主节点将node标记为PFAIL状态。</li>
+<li>当前节点也将node标记为PFAIL状态。</li>
+</ol>
+</li>
+<li>若主节点下线, 从多个从节点选新主</li>
+</ul>
+<h3 id="Redis-Sharding集群"><a href="#Redis-Sharding集群" class="headerlink" title="Redis Sharding集群"></a>Redis Sharding集群</h3><p>客户端 Sharding 技术</p>
+<h3 id="twemproxy"><a href="#twemproxy" class="headerlink" title="twemproxy"></a>twemproxy</h3><p>中间件 Sharding 技术</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ul>
+<li>积分排行榜: sorted list</li>
+<li>分布式锁: 我们可以在 Redis 服务器设置一个键值对，用以表示一把互斥锁，当申请锁的时候，要求申请方设置（SET）这个键值对，当释放锁的时候，要求释放方删除（DEL）这个键值对。</li>
+<li>消息队列: blocking queue, pub/sub</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://redisinaction.com/preview/chapter1.html" target="_blank" rel="external">http://redisinaction.com/preview/chapter1.html</a><br><a href="http://wiki.jikexueyuan.com/project/redis/" target="_blank" rel="external">http://wiki.jikexueyuan.com/project/redis/</a><br><a href="http://www.jianshu.com/p/0232236688c1" target="_blank" rel="external">http://www.jianshu.com/p/0232236688c1</a><br><a href="https://www.zhihu.com/question/21419897" target="_blank" rel="external">https://www.zhihu.com/question/21419897</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://freshergogo.github.io/2017/04/02/redis简介/" data-id="cj17vmk7f0005ex5hrwodtpwn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习/">学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/29/java-concurrent包简介/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">java concurrent包简介</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
 </section>
         
           <aside id="sidebar">

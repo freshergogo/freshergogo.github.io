@@ -88,11 +88,116 @@ HelloWorld class
   </div>
 </header>
       <div class="outer">
-        <section id="main"><div id="toc" class="toc-article">
-    <div class="toc-title">目录</div>
-    <%- toc(page.content, {list_number: false}) %>
-</div>
-<%- partial('_partial/article', {post: page, index: false}) %>
+        <section id="main"><article id="post-spring基础一" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/27/spring基础一/" class="article-date">
+  <time datetime="2017-03-27T02:55:26.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      spring基础一
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+	
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+    		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是-spring"><span class="toc-number">1.</span> <span class="toc-text">什么是 spring</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hello-world"><span class="toc-number">2.</span> <span class="toc-text">hello world</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hello-world-里做了什么"><span class="toc-number">2.1.</span> <span class="toc-text">hello world 里做了什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么使用容器管理对象而不直接创建对象"><span class="toc-number">2.2.</span> <span class="toc-text">为什么使用容器管理对象而不直接创建对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#再来一个例子"><span class="toc-number">3.</span> <span class="toc-text">再来一个例子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#这个例子又做了什么"><span class="toc-number">3.1.</span> <span class="toc-text">这个例子又做了什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么需要-Aspect"><span class="toc-number">3.2.</span> <span class="toc-text">为什么需要 Aspect</span></a></li></ol></li></ol>
+		</div>
+	
+        <h2 id="什么是-spring"><a href="#什么是-spring" class="headerlink" title="什么是 spring"></a>什么是 spring</h2><p>Spring 是一个为了解决企业应用程序开发复杂性而创建的 Java 开源框架。</p>
+<h2 id="hello-world"><a href="#hello-world" class="headerlink" title="hello world"></a>hello world</h2><ol>
+<li>打开 intellij idea</li>
+<li>新建 spring 项目: file -&gt; new -&gt; project, 选择 spring, next -&gt; finish</li>
+<li><p>在 src 文件夹下添加三个文件</p>
+<ul>
+<li><p>HelloWorld class</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">   public class HelloWorld &#123;</div><div class="line">   	private String message;</div><div class="line">   	public void setMessage(String message)&#123;</div><div class="line">       	this.message  = message;</div><div class="line">   	&#125;</div><div class="line">   	public void getMessage()&#123;</div><div class="line">       	System.out.println(&quot;Your Message : &quot; + message);</div><div class="line">   	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Main class</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">   import org.springframework.beans.factory.xml.XmlBeanFactory;</div><div class="line">import org.springframework.core.io.ClassPathResource;</div><div class="line">public class Main &#123;</div><div class="line">   	public static void main(String[] args) &#123;</div><div class="line">       	XmlBeanFactory factory = new XmlBeanFactory</div><div class="line">               	(new ClassPathResource(&quot;Beans.xml&quot;));</div><div class="line">       	HelloWorld obj = (HelloWorld) factory.getBean(&quot;helloWorld&quot;);</div><div class="line">       	obj.getMessage();</div><div class="line">   	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Beans.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">   &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</div><div class="line">          xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</div><div class="line">      	   xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;</div><div class="line"></div><div class="line">   	&lt;bean id=&quot;helloWorld&quot; class=&quot;HelloWorld&quot;&gt;</div><div class="line">       	&lt;property name=&quot;message&quot; value=&quot;Hello World!&quot;/&gt;</div><div class="line">   	&lt;/bean&gt;</div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>运行程序, 得到输出: Your Message : Hello World!</p>
+</li>
+</ol>
+<h3 id="hello-world-里做了什么"><a href="#hello-world-里做了什么" class="headerlink" title="hello world 里做了什么"></a>hello world 里做了什么</h3><p><img src="/images/springcontainer.jpg" alt=""></p>
+<p>在 main 函数里, 我们创建了一个 XmlBeanFactory. 它是一个 spring 容器, 根据阅读配置元数据提供的指令，对对象进行实例化，配置和组装, 并管理他们的整个生命周期从创建到销毁。配置元数据可以通过 XML，Java 注释或 Java 代码来表示。</p>
+<h3 id="为什么使用容器管理对象而不直接创建对象"><a href="#为什么使用容器管理对象而不直接创建对象" class="headerlink" title="为什么使用容器管理对象而不直接创建对象"></a>为什么使用容器管理对象而不直接创建对象</h3><p><img src="/images/齿轮_耦合关系_full.jpg" alt=""><br><img src="/images/齿轮_解耦合_full.jpg" alt=""></p>
+<p>前一张图中, 当对象 a 依赖对象 b 时, 需要自己实例化对象 b , 耦合程度高, 后一张图中, 由容器负责创建和管理对象 b 并组装到对象 a, 耦合程度低. 对象 b 的控制权从对象 a 转移到容器, 即控制反转. spring 中用依赖注入实现控制反转: 让容器全权负责依赖查询，受管组件只需要暴露依赖对象的setter方法或者带参数的构造子或者接口，使容器可以在初始化时组装对象的依赖关系。</p>
+<h2 id="再来一个例子"><a href="#再来一个例子" class="headerlink" title="再来一个例子"></a>再来一个例子</h2><ol>
+<li>下载 aspectjweaver-1.6.6.jar , file -&gt; project structure -&gt; libraries -&gt; add, 添加下载的 jar</li>
+<li><p>修改 Main</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">import org.springframework.context.ApplicationContext;</div><div class="line">import org.springframework.context.support.ClassPathXmlApplicationContext;</div><div class="line">public class Main &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        ApplicationContext act = new ClassPathXmlApplicationContext(&quot;Beans.xml&quot;);</div><div class="line">        HelloWorld obj = (HelloWorld) act.getBean(&quot;helloWorld&quot;);</div><div class="line">        obj.sayHello();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改 HelloWorld</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public class HelloWorld &#123;</div><div class="line">    public void sayHello()&#123;</div><div class="line">        System.out.println(&quot;hello&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改 Beans.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</div><div class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</div><div class="line">       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;</div><div class="line"></div><div class="line">    &lt;aop:aspectj-autoproxy/&gt;</div><div class="line"></div><div class="line">    &lt;bean id=&quot;helloWorld&quot; class=&quot;HelloWorld&quot;&gt;&lt;/bean&gt;</div><div class="line"></div><div class="line">    &lt;bean id=&quot;myAspect&quot; class=&quot;HelloAspect&quot;&gt;&lt;/bean&gt;</div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加 HelloAspect</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">import org.aspectj.lang.annotation.Aspect;</div><div class="line">import org.aspectj.lang.annotation.Before;</div><div class="line">@Aspect</div><div class="line">public class HelloAspect &#123;</div><div class="line"></div><div class="line">    @Before(&quot;execution(* HelloWorld.sayHello())&quot;)</div><div class="line">    public void doAccessCheck() &#123;</div><div class="line">        System.out.println(&quot;before say hello&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>运行项目, 得到输出 before say hello hello</p>
+</li>
+</ol>
+<h3 id="这个例子又做了什么"><a href="#这个例子又做了什么" class="headerlink" title="这个例子又做了什么"></a>这个例子又做了什么</h3><p>查看 main 函数, 我们仍然是先获得 helloWorld 这个 bean, 再调用它的 sayHello 方法. 通过输出可以发现, 在 sayHello 之前, HelloAspect 里的 doAccessCheck 方法先被调用了. 这是因为我们定义了一个 Aspect, 即 HelloAspect. 这个 Aspect 相当于拦截器来拦截一个应用程序，例如，当执行一个方法时，你可以在方法执行之前或之后添加额外的功能。</p>
+<h3 id="为什么需要-Aspect"><a href="#为什么需要-Aspect" class="headerlink" title="为什么需要 Aspect"></a>为什么需要 Aspect</h3><p>Aspect 用于实现 AOP (面向切面) 编程, 它是对 OOP 的一种补充.</p>
+<p>举个例子, 日志打印. 在应用中往往在多个地方需要打印日志, 比如说在每次访问数据库前都打印 “将要访问数据库”. 在 OOP 中, 如果想要重用打印日志的代码, 我们可以把打印日志的代码封装到一个类, 让所有要打印日志的子类去继承, 这样做有两个缺点, 一个是让很多子类去继承一个父类, 强耦合, 另一个是需要由业务逻辑代码显式地去调用打印日志的方法, 如果说之后在访问数据库前要加入权限验证, 又需要去修改原来的代码, 让它显式地调用权限验证的方法. 另一个方法是使用代理, AOP 就是一种很方便的代理, 可以代理多个类多个方法, 只要定义好增强逻辑和它的切入点就可以了, 其他的东西都可以交给框架处理.</p>
+<p>我们知道，OOP引进”抽象”、”封装”、”继承”、”多态”等概念,对万事万物进行抽象和封装，来建立一种对象的层次结构，它强调了一种完整事物的自上而下的关系。而 AOP 技术则恰恰相反，它利用一种称为”横切”的技术，能够剖解开封装的对象内部，并将那些影响了多个类并且与具体业务无关的公共行为 封装成一个独立的模块（称为切面）。更重要的是，它又能以巧夺天功的妙手将这些剖开的切面复原，不留痕迹的融入核心业务逻辑中。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://freshergogo.github.io/2017/03/27/spring基础一/" data-id="cj17vmk7j0008ex5hgo8zz4wq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习/">学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/29/java-concurrent包简介/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          java concurrent包简介
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/25/jvm知识点总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">jvm知识点总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
 </section>
         
           <aside id="sidebar">
